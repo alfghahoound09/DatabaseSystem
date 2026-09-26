@@ -1,2 +1,2 @@
 ﻿# CƠ SỞ DỮ LIỆU - UET
-Docmument cho môn cơ sở dữ liệu khóa K70 (còn khóa sau thì ko biết)
+Documents cho môn cơ sở dữ liệu khóa K70 (còn khóa sau thì ko biết)
