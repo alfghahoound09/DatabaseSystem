@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện Thi Giữa Kỳ Cơ Sở Dữ Liệu - UET K70</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-light: rgba(59, 130, 246, 0.15);
+      --success: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+      --danger: #ef4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --warning: #f59e0b;
+      --warning-light: rgba(245, 158, 11, 0.15);
+      --info: #06b6d4;
+      
+      /* Dark Theme (Default) */
+      --bg-main: #0b0f19;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.8);
+      --bg-subtle: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-focus: #3b82f6;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.5);
+      --svg-bg: #0f172a;
+      --code-bg: #030712;
+      --code-border: #1f2937;
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #f8fafc;
+      --bg-subtle: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-focus: #2563eb;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.12);
+      --svg-bg: #f8fafc;
+      --code-bg: #f8fafc;
+      --code-border: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* HEADER */
+    header.exam-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 12px 24px;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .brand-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exam-tag {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .brand-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .exam-code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 2px 8px;
+      background: var(--bg-subtle);
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* TIMER */
+    .timer-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-subtle);
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .timer-badge.warning {
+      color: var(--warning);
+      border-color: var(--warning);
+      background: var(--warning-light);
+    }
+
+    .timer-badge.danger {
+      color: var(--danger);
+      border-color: var(--danger);
+      background: var(--danger-light);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    /* HEADER CONTROLS */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+    }
+
+    button.btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    button.btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    button.btn-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    button.btn-success:hover {
+      background: linear-gradient(135deg, #047857, #059669);
+      transform: translateY(-1px);
+    }
+
+    button.btn-outline {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    button.btn-outline:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    button.btn-icon {
+      padding: 8px 12px;
+    }
+
+    /* MAIN LAYOUT */
+    .app-container {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      flex: 1;
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+      .navigator-col {
+        order: -1;
+      }
+    }
+
+    /* QUESTION CARD */
+    .question-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 24px;
+      margin-bottom: 24px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .question-card.flagged {
+      border-left: 5px solid var(--warning);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .q-number-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .q-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .q-chapter {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-subtle);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .q-type-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .type-single {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+    }
+
+    .type-multiple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+    }
+
+    .type-zero {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+    }
+
+    .q-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-flag {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-flag:hover, .btn-flag.active {
+      color: var(--warning);
+      background: var(--warning-light);
+    }
+
+    .q-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* OPTIONS LIST */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .option-item:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateX(2px);
+    }
+
+    .option-item.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .option-label-letter {
+      font-weight: 700;
+      font-size: 14px;
+      min-width: 22px;
+      color: var(--primary);
+    }
+
+    .option-text {
+      font-size: 14px;
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    /* EXPLANATION BOX */
+    .explanation-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 13.5px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .explanation-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ER QUESTION SECTION */
+    .er-section-header {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .er-section-header h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .er-diagram-container {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      margin: 18px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .er-svg {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .er-scenario-box {
+      background: var(--bg-subtle);
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .er-scenario-box ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .er-scenario-box li {
+      margin-bottom: 4px;
+    }
+
+    .er-code-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 8px;
+      padding: 14px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      color: #93c5fd;
+    }
+
+    .er-code-box u {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-decoration-color: #f59e0b;
+      font-weight: 700;
+      color: #fef08a;
+    }
+
+    .er-answer-input {
+      width: 100%;
+      min-height: 220px;
+      resize: vertical;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--code-border);
+      background: var(--code-bg);
+      color: var(--text-main);
+      tab-size: 2;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .er-answer-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .er-answer-input:read-only {
+      opacity: 0.9;
+      cursor: default;
+      background: var(--bg-subtle);
+    }
+
+    .er-answer-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.6;
+      background: var(--bg-subtle);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .er-answer-hint code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* ER ESSAY EDITOR & TOOLBAR */
+    .er-editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .btn-tool {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-tool:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ER LIVE PREVIEW */
+    .er-live-preview {
+      margin-top: 14px;
+      background: var(--bg-subtle);
+      border: 1px dashed var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .er-live-preview-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preview-tables-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .preview-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+    }
+
+    .preview-tbl-name {
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .preview-pk-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .preview-attr-badge {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .preview-warn-badge {
+      font-size: 11.5px;
+      color: var(--warning);
+      margin-left: auto;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ER DETAILED REVIEW */
+    .er-review-box {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .er-score-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .er-tables-breakdown {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .er-table-eval-card {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13px;
+    }
+
+    .er-table-eval-card.status-perfect {
+      border-left-color: var(--success);
+    }
+
+    .er-table-eval-card.status-partial {
+      border-left-color: var(--warning);
+    }
+
+    .er-table-eval-card.status-missing {
+      border-left-color: var(--danger);
+    }
+
+    .er-side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .er-side-by-side {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .er-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* SIDEBAR / NAVIGATOR */
+    .sidebar-sticky {
+      position: sticky;
+      top: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    .nav-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .progress-track {
+      background: var(--bg-subtle);
+      height: 6px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .q-btn {
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .q-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    .q-btn.answered {
+      background: #2563eb;
+      color: white;
+      border-color: #1d4ed8;
+    }
+
+    .q-btn.flagged::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+
+    .q-btn.er-btn {
+      grid-column: span 5;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.2));
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      font-weight: 700;
+    }
+
+    .q-btn.er-btn.answered {
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      color: white;
+    }
+
+    .legend-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    .legend-dot.unanswered { background: var(--bg-subtle); }
+    .legend-dot.answered { background: #2563eb; }
+    .legend-dot.flagged { background: #f59e0b; }
+
+    /* STATS CARD */
+    .stats-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      padding: 18px;
+      font-size: 13px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-row:last-child {
+      border-bottom: none;
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal-dialog {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 600px;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .score-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: 16px auto 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+    }
+
+    .score-circle.excellent { background: linear-gradient(135deg, #059669, #10b981); }
+    .score-circle.good { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .score-circle.fair { background: linear-gradient(135deg, #d97706, #f59e0b); }
+    .score-circle.poor { background: linear-gradient(135deg, #dc2626, #ef4444); }
+
+    .modal-breakdown {
+      background: var(--bg-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      text-align: left;
+      font-size: 13.5px;
+    }
+
+    /* REVIEW MODE STYLES */
+    .option-item.correct-choice {
+      border-color: var(--success) !important;
+      background: var(--success-light) !important;
+    }
+
+    .option-item.wrong-choice {
+      border-color: var(--danger) !important;
+      background: var(--danger-light) !important;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      padding: 18px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="exam-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo">CS</div>
+        <div class="brand-info">
+          <h1>
+            Đề Thi Giữa Kỳ CSDL (K70 - UET)
+            <span class="exam-tag">Midterm Exam</span>
+          </h1>
+          <div class="brand-meta">
+            <span>Mã đề: <strong id="examCodeDisplay" class="exam-code-pill">CSDL-MT01</strong></span>
+            <span>Cấu trúc: 15 Lý thuyết + 1 Bài ER (tự luận)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMER -->
+      <div id="timerBadge" class="timer-badge">
+        <span>⏱️</span>
+        <span id="timerDisplay">45:00</span>
+      </div>
+
+      <!-- HEADER ACTIONS -->
+      <div class="header-actions">
+        <button id="btnNewExam" class="btn btn-outline" title="Bốc ngẫu nhiên 15 câu lý thuyết và 1 bài ER mới">
+          🔄 Đổi Đề Mới (Xoay tua)
+        </button>
+        <button id="btnPracticeMode" class="btn btn-outline" title="Bật/Tắt chế độ xem giải thích ngay khi chọn">
+          💡 Chế độ Ôn tập: <span id="practiceStatus">TẮT</span>
+        </button>
+        <button id="btnThemeToggle" class="btn btn-outline btn-icon" title="Đổi giao diện Sáng/Tối">
+          🌓
+        </button>
+        <button id="btnSubmitExam" class="btn btn-success">
+          📤 Nộp Bài Thi
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="app-container">
+    <!-- LEFT COLUMN: QUESTIONS -->
+    <div class="questions-col">
+      
+      <!-- Theory Section Title -->
+      <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="font-size: 20px; font-weight: 800;">
+          Phần 1: Lý Thuyết Cơ Sở Dữ Liệu (15 Câu - 6.0 Điểm)
+        </h2>
+        <span style="font-size: 13px; color: var(--text-muted);">
+          Gồm câu 1 đáp án, nhiều đáp án, hoặc 0 đáp án đúng
+        </span>
+      </div>
+
+      <!-- THEORY QUESTIONS CONTAINER -->
+      <div id="theoryQuestionsList">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- ER TO RELATIONAL SECTION -->
+      <div class="er-section-header" id="erSection">
+        <h2>
+          <span>📐</span>
+          Phần 2: Bài Tập Chuyển Đổi ER Sang Mô Hình Quan Hệ (1 Câu - 4.0 Điểm)
+        </h2>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+          Hãy phân tích kỹ các thực thể mạnh, thực thể yếu, các bậc và bản số của mối quan hệ, các thuộc tính đa trị, rồi tự viết lược đồ quan hệ tương ứng vào ô trả lời bên dưới:
+        </p>
+      </div>
+
+      <!-- ER PROBLEM CONTAINER -->
+      <div id="erProblemContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: QUICK NAVIGATOR -->
+    <div class="navigator-col">
+      <div class="sidebar-sticky">
+        
+        <!-- PALETTE CARD -->
+        <div class="nav-card">
+          <div class="nav-card-title">
+            <span>Bảng Điều Hướng Câu Hỏi</span>
+            <span id="progressText" style="font-size: 12px; color: var(--text-muted);">0 / 16</span>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress-track">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+
+          <!-- Question Grid (1-15 + 16 ER) -->
+          <div class="q-grid" id="questionNavGrid">
+            <!-- Buttons 1-15 and 16 generated by JS -->
+          </div>
+
+          <!-- Legend -->
+          <div class="legend-box">
+            <div class="legend-item">
+              <div class="legend-dot unanswered"></div>
+              <span>Chưa làm</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot answered"></div>
+              <span>Đã làm</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot flagged"></div>
+              <span>Đánh dấu (⚑)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXAM STATS CARD -->
+        <div class="stats-card">
+          <h4 style="font-weight: 700; margin-bottom: 10px;">Thông Tin Đề Thi</h4>
+          <div class="stats-row">
+            <span style="color: var(--text-muted);">Thời gian làm bài:</span>
+            <strong>45 phút</strong>
+          </div>
+          <div class="stats-row">
+            <span style="color: var(--text-muted);">Số câu lý thuyết:</span>
+            <strong>15 câu (0.4 đ/câu)</strong>
+          </div>
+          <div class="stats-row">
+            <span style="color: var(--text-muted);">Số bài tập ER:</span>
+            <strong>1 bài (tự luận - 4.0 đ)</strong>
+          </div>
+          <div class="stats-row">
+            <span style="color: var(--text-muted);">Tổng điểm:</span>
+            <strong style="color: var(--primary);">10.0 điểm</strong>
+          </div>
+          <div class="stats-row">
+            <span style="color: var(--text-muted);">Kho ngân hàng:</span>
+            <span>60 câu + 6 bài ER</span>
+          </div>
+        </div>
+
+        <!-- QUICK RESET BUTTON -->
+        <button id="btnResetAnswers" class="btn btn-outline" style="width: 100%; justify-content: center;">
+          🧹 Làm lại đề hiện tại
+        </button>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- RESULT MODAL -->
+  <div id="resultModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">KẾT QUẢ BÀI THI GIỮA KỲ</h2>
+      <p id="modalExamCode" style="font-size: 14px; color: var(--text-muted);">Mã đề: CSDL-MT01</p>
+      
+      <div id="scoreCircle" class="score-circle good">
+        <span id="scoreValue">8.5</span>
+        <span style="font-size: 13px; font-weight: 500; opacity: 0.9;">/ 10 điểm</span>
+      </div>
+
+      <h3 id="scoreRank" style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--primary);">
+        XẾP LOẠI: GIỎI
+      </h3>
+
+      <div class="modal-breakdown">
+        <div>
+          <span style="color: var(--text-muted);">Lý thuyết:</span>
+          <br><strong id="theoryScoreDisplay" style="font-size: 16px;">5.2 / 6.0 đ</strong>
+          <span id="theoryCountDisplay" style="font-size: 12px; color: var(--text-muted); display: block;">(13/15 câu đúng)</span>
+        </div>
+        <div>
+          <span style="color: var(--text-muted);">Bài tập ER:</span>
+          <br><strong id="erScoreDisplay" style="font-size: 16px;">4.0 / 4.0 đ</strong>
+          <span id="erStatusDisplay" style="font-size: 12px; color: var(--success); display: block;">(Chính xác)</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+        <button id="btnCloseModalReview" class="btn btn-primary" style="flex: 1;">
+          🔍 Xem Lại Lời Giải Chi Tiết
+        </button>
+        <button id="btnModalNewExam" class="btn btn-outline" style="flex: 1;">
+          🔄 Làm Đề Thi Khác
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Hệ Thống Luyện Thi Giữa Kỳ Cơ Sở Dữ Liệu - Trường Đại học Công nghệ (UET) - Khóa K70</p>
+    <p style="margin-top: 4px; font-size: 12px;">Đầy đủ các chủ đề C1, C2, C3 & Thuật toán chuyển đổi ER sang lược đồ quan hệ</p>
+  </footer>
+
+  <!-- DATA & LOGIC SCRIPT -->
+  <script>
+    // Embedded Data
+    const ALL_THEORY_QUESTIONS = [{"id": "c1_s01", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Trong kiến trúc 3 mức của hệ quản trị cơ sở dữ liệu (ANSI/SPARC), mức nào mô tả cách dữ liệu thực sự được tổ chức và lưu trữ trên các thiết bị nhớ vật lý?", "options": ["Mức khung nhìn (View / External level)", "Mức quan niệm (Conceptual level)", "Mức trong (Internal / Physical level)", "Mức logic toàn cục (Global logical level)"], "correct": [2], "explanation": "Mức trong (Internal/Physical level) mô tả cấu trúc lưu trữ vật lý của CSDL, các giải thuật đánh chỉ mục, định dạng bản ghi trên đĩa. Mức quan niệm mô tả toàn bộ cấu trúc logic của CSDL. Mức ngoài (External/View) mô tả góc nhìn của từng nhóm người dùng."}, {"id": "c1_s02", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Tính 'độc lập dữ liệu vật lý' (Physical Data Independence) trong hệ CSDL có nghĩa là gì?", "options": ["Khả năng thay đổi lược đồ quan niệm mà không làm thay đổi các lược đồ ngoài.", "Khả năng thay đổi lược đồ trong (cấu trúc lưu trữ vật lý) mà không phải thay đổi lược đồ quan niệm và các chương trình ứng dụng.", "Khả năng chạy CSDL độc lập không phụ thuộc vào hệ điều hành hay phần cứng máy tính.", "Khả năng phân tán dữ liệu trên nhiều đĩa cứng mà người dùng không biết."], "correct": [1], "explanation": "Độc lập dữ liệu vật lý là khả năng sửa đổi lược đồ trong (như thay đổi cấu trúc file, thêm chỉ mục B-tree) mà không ảnh hưởng tới lược đồ quan niệm và các ứng dụng. Còn khả năng thay đổi lược đồ quan niệm mà không đổi lược đồ ngoài là độc lập dữ liệu logic."}, {"id": "c1_s03", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Ngôn ngữ nào sau đây của DBMS được sử dụng để định nghĩa cấu trúc dữ liệu, tạo bảng, sửa đổi lược đồ và các ràng buộc toàn vẹn?", "options": ["DML (Data Manipulation Language)", "DCL (Data Control Language)", "DDL (Data Definition Language)", "TCL (Transaction Control Language)"], "correct": [2], "explanation": "DDL (Data Definition Language - Ngôn ngữ định nghĩa dữ liệu) được sử dụng để định nghĩa và chỉnh sửa cấu trúc lược đồ CSDL (CREATE, ALTER, DROP). DML dùng để thao tác dữ liệu (SELECT, INSERT, UPDATE, DELETE)."}, {"id": "c1_s04", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Trong các đối tượng người dùng của DBMS, ai là người chịu trách nhiệm chính về việc cấp quyền truy cập, giám sát hiệu năng hệ thống và bảo đảm an toàn dữ liệu?", "options": ["Người dùng cuối (End Users)", "Chuyên viên phân tích hệ thống (System Analysts)", "Người quản trị cơ sở dữ liệu (DBA - Database Administrator)", "Lập trình viên ứng dụng (Application Programmers)"], "correct": [2], "explanation": "DBA (Database Administrator) chịu trách nhiệm quản lý toàn bộ tài nguyên CSDL, cấp quyền truy cập người dùng, giám sát hoạt động, sao lưu và phục hồi dữ liệu khi gặp sự cố."}, {"id": "c1_s05", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Thư viện / Từ điển dữ liệu (Data Dictionary / System Catalog) trong một DBMS có chức năng chính là gì?", "options": ["Lưu trữ dữ liệu nghiệp vụ của tất cả các bảng trong CSDL.", "Lưu trữ siêu dữ liệu (metadata), bao gồm thông tin về các lược đồ, bảng, thuộc tính, kiểu dữ liệu, ràng buộc và quyền hạn.", "Lưu trữ nhật ký sao lưu (backup log) để khôi phục hệ thống khi mất điện.", "Dịch các câu lệnh SQL sang mã máy để CPU xử lý trực tiếp."], "correct": [1], "explanation": "System Catalog lưu trữ 'siêu dữ liệu' (metadata - dữ liệu về dữ liệu), mô tả cấu trúc lược đồ, kiểu dữ liệu, các ràng buộc và thông tin bảo mật phân quyền."}, {"id": "c2_s01", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Trong mô hình ER, một thuộc tính có thể được phân rã thành các thành phần nhỏ hơn có ý nghĩa độc lập (ví dụ: HoTen gồm Ho, Dem, Ten) được gọi là:", "options": ["Thuộc tính suy diễn (Derived attribute)", "Thuộc tính phức hợp (Composite attribute)", "Thuộc tính đa trị (Multivalued attribute)", "Thuộc tính khóa (Key attribute)"], "correct": [1], "explanation": "Thuộc tính phức hợp (Composite attribute) là thuộc tính gồm nhiều thành phần nhỏ hơn. Thuộc tính đa trị là thuộc tính có thể có nhiều giá trị cho một thực thể (ví dụ: SoDienThoai). Thuộc tính suy diễn là thuộc tính được tính toán từ thuộc tính khác (ví dụ: Tuoi tính từ NgaySinh)."}, {"id": "c2_s02", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Ký hiệu chuẩn trong biểu đồ ER (Chen notation) cho một 'Kiểu thực thể yếu' (Weak Entity Type) là:", "options": ["Hình chữ nhật nét đơn", "Hình chữ nhật nét đôi (Double rectangle)", "Hình thoi nét đôi (Double diamond)", "Hình bầu dục nét đứt (Dashed oval)"], "correct": [1], "explanation": "Trong ký hiệu ER của Chen: Hình chữ nhật nét đôi biểu diễn Kiểu thực thể yếu; Hình thoi nét đôi biểu diễn Mối liên kết xác định (Identifying relationship); Hình bầu dục nét đứt biểu diễn Thuộc tính suy diễn."}, {"id": "c2_s03", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Thuộc tính khóa bộ phận (Partial Key / Discriminator) của một kiểu thực thể yếu được biểu diễn trên sơ đồ ER như thế nào?", "options": ["Gạch chân nét liền toàn bộ tên thuộc tính", "Gạch chân nét đứt (Dashed underline)", "Khoanh tròn hai nét", "Viết hoa toàn bộ và in đậm"], "correct": [1], "explanation": "Khóa bộ phận (Partial Key) của thực thể yếu được ký hiệu bằng đường gạch chân nét đứt bên dưới tên thuộc tính (Dashed underline)."}, {"id": "c2_s04", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Một mối quan hệ hai ngôi (binary relationship) giữa hai kiểu thực thể A và B có bản số (cardinality ratio) là 1:N. Điều này có nghĩa là:", "options": ["Mỗi thực thể thuộc A liên kết với đúng 1 thực thể thuộc B, và mỗi thực thể thuộc B liên kết với đúng 1 thực thể thuộc A.", "Mỗi thực thể thuộc A có thể liên kết với nhiều thực thể thuộc B, nhưng mỗi thực thể thuộc B chỉ liên kết với tối đa một thực thể thuộc A.", "Mỗi thực thể thuộc A chỉ liên kết với tối đa một thực thể thuộc B, và mỗi thực thể thuộc B có thể liên kết với nhiều thực thể thuộc A.", "Mỗi thực thể thuộc A và B đều có thể liên kết với nhiều thực thể của bên kia."], "correct": [1], "explanation": "Quan hệ 1:N từ A sang B: một thực thể A có thể liên kết với N thực thể B, nhưng mỗi thực thể B chỉ liên kết với tối đa 1 thực thể A."}, {"id": "c2_s05", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Ràng buộc tham gia toàn phần (Total Participation) của một kiểu thực thể vào một mối quan hệ được biểu diễn bằng ký hiệu nào trong sơ đồ ER?", "options": ["Đường nối nét đơn giữa thực thể và hình thoi quan hệ", "Đường nối nét đôi (Double line) giữa thực thể và hình thoi quan hệ", "Mũi tên chỉ từ thực thể tới quan hệ", "Dấu chấm tròn ở đầu mút liên kết"], "correct": [1], "explanation": "Tham gia toàn phần (Total participation / Existence dependency) được biểu diễn bằng đường nét đôi (double line) nối kiểu thực thể với hình thoi quan hệ. Tham gia bộ phận biểu diễn bằng nét đơn."}, {"id": "c3_s01", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "single", "question": "Trong mô hình quan hệ, số lượng các bộ (tuples / dòng) hiện có trong một quan hệ R tại một thời điểm được gọi là:", "options": ["Bậc của quan hệ (Degree / Arity)", "Lực lượng của quan hệ (Cardinality)", "Kích thước lược đồ (Schema size)", "Miền giá trị (Domain)"], "correct": [1], "explanation": "Số dòng (bộ) gọi là Lực lượng (Cardinality). Số cột (thuộc tính) gọi là Bậc (Degree/Arity) của quan hệ."}, {"id": "c3_s02", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "single", "question": "Ràng buộc 'Toàn vẹn thực thể' (Entity Integrity Constraint) trong mô hình CSDL quan hệ phát biểu điều gì?", "options": ["Mọi giá trị của khóa ngoại đều phải xuất hiện trong khóa chính của bảng được tham chiếu.", "Không một thuộc tính nào thuộc khóa chính của quan hệ được phép nhận giá trị NULL.", "Dữ liệu nhập vào cột phải thỏa mãn đúng kiểu dữ liệu và miền giá trị quy định.", "Không được phép xóa một bản ghi cha khi bản ghi con vẫn đang tham chiếu tới nó."], "correct": [1], "explanation": "Toàn vẹn thực thể (Entity Integrity): Khóa chính đóng vai trò định danh duy nhất từng bộ dữ liệu, do đó KHÔNG một thuộc tính nào cấu thành nên khóa chính được mang giá trị NULL."}, {"id": "c3_s03", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "single", "question": "Ràng buộc 'Toàn vẹn tham chiếu' (Referential Integrity Constraint) quy định giá trị của khóa ngoại (Foreign Key) như thế nào?", "options": ["Khóa ngoại bắt buộc phải luôn luôn khác NULL và không được trùng lặp.", "Khóa ngoại bắt buộc phải là một tập con của khóa chính trong cùng một bảng.", "Giá trị của khóa ngoại trong bảng con phải xuất hiện trong tập giá trị của khóa chính ở bảng cha, hoặc phải mang giá trị NULL (nếu không có ràng buộc NOT NULL).", "Khóa ngoại phải có tên giống hệt với tên khóa chính ở bảng cha."], "correct": [2], "explanation": "Toàn vẹn tham chiếu (Referential Integrity): Giá trị của FK hoặc là bằng giá trị PK của một bộ nào đó trong quan hệ được tham chiếu, hoặc là mang giá trị NULL."}, {"id": "c3_s04", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "single", "question": "Phép toán đại số quan hệ nào thực hiện trích chọn một tập con các cột (thuộc tính) từ một quan hệ và loại bỏ các dòng trùng lặp trong kết quả?", "options": ["Phép chọn (Selection - ký hiệu σ)", "Phép chiếu (Projection - ký hiệu π)", "Phép tích Descartes (Cartesian Product - ký hiệu ×)", "Phép đổi tên (Rename - ký hiệu ρ)"], "correct": [1], "explanation": "Phép chiếu π (Project) chọn ra các cột xác định từ quan hệ và loại bỏ các bộ trùng lặp để đảm bảo tính chất tập hợp của quan hệ."}, {"id": "c3_s05", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "single", "question": "Điều kiện để hai quan hệ R và S có thể thực hiện được các phép toán Hợp (∪), Giao (∩), Trừ (-) là gì?", "options": ["Hai quan hệ phải có cùng số lượng các bộ (cùng cardinality).", "Hai quan hệ phải có cùng khóa chính.", "Hai quan hệ phải 'tương thích hợp' (Union-compatible): cùng bậc (cùng số thuộc tính) và các miền giá trị tương ứng của từng cặp thuộc tính phải tương thích.", "Hai quan hệ phải có ít nhất một thuộc tính chung làm khóa ngoại."], "correct": [2], "explanation": "Để thực hiện Hợp, Giao, Trừ trong đại số quan hệ, R và S phải tương thích hợp (Union-compatible): degree(R) = degree(S) và dom(Ai) = dom(Bi) với mọi i từ 1 đến n."}, {"id": "c3_s06", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "single", "question": "Cho quan hệ R có n bộ và quan hệ S có m bộ. Phép tích Descartes R × S sẽ tạo ra một quan hệ mới có số bộ là bao nhiêu?", "options": ["n + m", "n * m", "max(n, m)", "min(n, m)"], "correct": [1], "explanation": "Số bộ của quan hệ kết quả tích Descartes R × S luôn luôn bằng n * m (lực lượng của R nhân lực lượng của S)."}, {"id": "c3_s07", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "single", "question": "Theo thuật toán chuyển đổi chuẩn từ mô hình ER sang mô hình quan hệ, một 'Thuộc tính đa trị' A của kiểu thực thể E (có khóa chính là K) được ánh xạ như thế nào?", "options": ["Thêm nhiều cột A1, A2, A3 vào trực tiếp trong bảng của E.", "Tạo một quan hệ riêng gồm {K, A}, trong đó khóa chính của bảng mới là tập hợp gồm cả {K, A}, và K là khóa ngoại trỏ về E.", "Bỏ qua thuộc tính A vì mô hình quan hệ không hỗ trợ thuộc tính đa trị.", "Tạo một quan hệ riêng chỉ chứa duy nhất thuộc tính A làm khóa chính."], "correct": [1], "explanation": "Thuộc tính đa trị được chuyển thành quan hệ mới gồm khóa chính K của thực thể (làm khóa ngoại) và thuộc tính đa trị A. Khóa chính của quan hệ mới là kết hợp {K, A}."}, {"id": "c3_s08", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "single", "question": "Trong thuật toán chuyển đổi ER sang quan hệ, đối với một liên kết hai ngôi 1:N thông thường giữa thực thể A (phía 1) và thực thể B (phía N), cách ánh xạ chuẩn là:", "options": ["Đặt khóa chính của B vào bảng A làm khóa ngoại.", "Đặt khóa chính của A vào bảng B làm khóa ngoại, cùng các thuộc tính của mối liên kết (nếu có).", "Bắt buộc phải tạo một bảng quan hệ trung gian mới chứa khóa của cả A và B.", "Gộp hai bảng A và B thành một bảng duy nhất."], "correct": [1], "explanation": "Với mối liên kết 1:N, cách chuẩn là đưa khóa chính của bên 1 sang làm khóa ngoại ở bảng phía N (+ các thuộc tính liên kết nếu có)."}, {"id": "c3_s09", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "single", "question": "Khi chuyển đổi một 'Kiểu thực thể yếu' W (với khóa bộ phận là B, phụ thuộc vào thực thể chủ E có khóa chính là K) sang mô hình quan hệ, khóa chính của quan hệ W là gì?", "options": ["Chỉ bao gồm khóa bộ phận B.", "Chỉ bao gồm khóa chính K của thực thể chủ.", "Kết hợp cả khóa ngoại K (từ thực thể chủ) và khóa bộ phận B: {K, B}.", "Hệ thống tự động sinh một khóa số nguyên ngẫu nhiên (Surrogate key) độc lập."], "correct": [2], "explanation": "Quan hệ sinh ra từ thực thể yếu W sẽ nhận khóa chính là sự kết hợp giữa khóa chính K của thực thể chủ (đóng vai trò khóa ngoại) và khóa bộ phận B: PK = {K, B}."}, {"id": "c3_s10", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "single", "question": "Khi ánh xạ một mối quan hệ nhiều-nhiều (N:M) giữa hai kiểu thực thể A (khóa KA) và B (khóa KB) có thêm thuộc tính mô tả C, kết quả tạo ra là:", "options": ["Đưa KA vào bảng B và đưa KB vào bảng A.", "Tạo quan hệ mới R(KA, KB, C) với khóa chính là kết hợp {KA, KB}, trong đó KA và KB là các khóa ngoại trỏ về A và B.", "Tạo quan hệ mới R(KA, KB, C) với khóa chính chỉ là KA.", "Gộp A và B thành một quan hệ chung có khóa chính là {KA, KB}."], "correct": [1], "explanation": "Mối quan hệ N:M luôn được chuyển thành một quan hệ riêng mới có khóa chính là tổ hợp các khóa ngoại trỏ về hai bảng tham gia: PK = {KA, KB}, kèm theo các thuộc tính của mối quan hệ."}, {"id": "c1_m01", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "multiple", "question": "Những ưu điểm nổi bật của Hệ Quản trị CSDL (DBMS) so với phương pháp quản lý dữ liệu bằng hệ thống tệp truyền thống (File-based system) là gì? (Chọn tất cả các đáp án đúng)", "options": ["Kiểm soát và giảm thiểu tối đa sự dư thừa dữ liệu (Data redundancy)", "Đảm bảo tính độc lập giữa chương trình và dữ liệu (Program-data independence)", "Cung cấp cơ chế kiểm soát truy cập đồng thời và khôi phục khi gặp sự cố", "Dung lượng lưu trữ trên ổ đĩa luôn giảm về 0"], "correct": [0, 1, 2], "explanation": "DBMS có các ưu điểm: giảm dư thừa, duy trì tính nhất quán, độc lập chương trình - dữ liệu, hỗ trợ đồng thời và phục hồi. Dung lượng không thể giảm về 0."}, {"id": "c1_m02", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "multiple", "question": "Những mô hình dữ liệu nào sau đây thuộc nhóm 'Mô hình dữ liệu logic' truyền thống trong lịch sử phát triển CSDL? (Chọn tất cả các đáp án đúng)", "options": ["Mô hình dữ liệu phân cấp (Hierarchical Model)", "Mô hình dữ liệu mạng (Network Model)", "Mô hình dữ liệu quan hệ (Relational Model)", "Mô hình lưu trữ theo khối vật lý trên đĩa (Physical Disk Block Model)"], "correct": [0, 1, 2], "explanation": "Mô hình phân cấp, mạng và quan hệ là các mô hình dữ liệu mức logic kinh điển. Mô hình lưu trữ khối vật lý thuộc mức vật lý/trong."}, {"id": "c2_m01", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "multiple", "question": "Trong mô hình ER, những loại thuộc tính nào sau đây KHÔNG ĐƯỢC lưu trữ trực tiếp dưới dạng một cột nguyên tử đơn giản trong bảng quan hệ chính của thực thể đó? (Chọn tất cả các đáp án đúng)", "options": ["Thuộc tính phức hợp (Composite attribute)", "Thuộc tính đa trị (Multivalued attribute)", "Thuộc tính suy diễn (Derived attribute)", "Thuộc tính đơn giản, đơn trị (Simple, single-valued attribute)"], "correct": [0, 1, 2], "explanation": "Thuộc tính phức hợp phải phân rã thành các thành phần đơn. Thuộc tính đa trị phải tách ra bảng riêng. Thuộc tính suy diễn thường không lưu trữ mà tính toán khi cần. Chỉ thuộc tính đơn giản, đơn trị mới lưu trực tiếp thành một cột đơn."}, {"id": "c2_m02", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "multiple", "question": "Những phát biểu nào sau đây về 'Kiểu thực thể yếu' (Weak Entity Type) là ĐÚNG? (Chọn tất cả các đáp án đúng)", "options": ["Thực thể yếu không có thuộc tính khóa riêng có thể tự định danh chính nó.", "Thực thể yếu luôn có ràng buộc tham gia toàn phần (Total participation) vào mối liên kết xác định của nó.", "Mối liên kết giữa thực thể yếu và thực thể chủ luôn là mối liên kết 1:1.", "Muốn định danh một thực thể yếu, bắt buộc phải kết hợp khóa bộ phận của nó với khóa chính của thực thể chủ."], "correct": [0, 1, 3], "explanation": "Thực thể yếu không có khóa riêng (đúng); luôn tham gia toàn phần vào liên kết xác định (đúng); khóa chính phải kết hợp từ khóa chủ và partial key (đúng). Liên kết xác định thường là 1:N (một thực thể chủ có nhiều thực thể yếu), không bắt buộc là 1:1."}, {"id": "c2_m03", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "multiple", "question": "Trong mô hình EER, những khẳng định nào sau đây là ĐÚNG đối với quan hệ Chuyên biệt hóa / Tổng quát hóa (Specialization / Generalization)? (Chọn tất cả các đáp án đúng)", "options": ["Lớp con (Subclass) tự động kế thừa tất cả các thuộc tính và các liên kết của lớp cha (Superclass).", "Ràng buộc Disjoint (Rời nhau) có nghĩa là một thực thể của lớp cha chỉ có thể thuộc về tối đa một lớp con.", "Ràng buộc Overlapping (Gối nhau) cho phép một thực thể đồng thời thuộc về nhiều lớp con khác nhau.", "Lớp con bắt buộc phải có khóa chính hoàn toàn độc lập và không liên quan đến lớp cha."], "correct": [0, 1, 2], "explanation": "Lớp con kế thừa mọi thuộc tính và quan hệ của lớp cha. Disjoint: thuộc tối đa 1 lớp con; Overlapping: có thể thuộc nhiều lớp con cùng lúc. Khóa chính của lớp con chính là khóa của lớp cha, nên phương án 4 sai."}, {"id": "c3_m01", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "multiple", "question": "Những phát biểu nào sau đây là đặc trưng cơ bản của một 'Quan hệ' (Relation) trong mô hình dữ liệu quan hệ của Ted Codd? (Chọn tất cả các đáp án đúng)", "options": ["Các bộ (dòng) trong một quan hệ là không có thứ tự (tính chất tập hợp).", "Các thuộc tính (cột) trong một quan hệ là không trùng tên trong cùng một quan hệ.", "Không được phép tồn tại hai bộ hoàn toàn trùng lặp dữ liệu trong cùng một quan hệ.", "Mỗi ô giá trị (cell) tại giao điểm của dòng và cột phải là giá trị nguyên tố (atomic value)."], "correct": [0, 1, 2, 3], "explanation": "Tất cả 4 phát biểu trên đều là đặc trưng chuẩn của quan hệ: không thứ tự dòng, thuộc tính định danh duy nhất, không trùng bộ (nhờ có khóa), giá trị nguyên tố (dạng chuẩn 1NF)."}, {"id": "c3_m02", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "multiple", "question": "Những khẳng định nào sau đây phân biệt chính xác giữa 'Siêu khóa' (Superkey), 'Khóa dự tuyển' (Candidate Key) và 'Khóa chính' (Primary Key)? (Chọn tất cả các đáp án đúng)", "options": ["Mọi khóa dự tuyển đều là một siêu khóa, nhưng một siêu khóa chưa chắc là khóa dự tuyển.", "Khóa dự tuyển là một siêu khóa tối thiểu (không thể bỏ bớt bất kỳ thuộc tính nào mà vẫn giữ được tính duy nhất).", "Một quan hệ có thể có nhiều khóa dự tuyển, nhưng chỉ có duy nhất một khóa được chỉ định làm khóa chính.", "Khóa chính có thể cho phép một số thuộc tính thành phần mang giá trị NULL nếu các thuộc tính còn lại không rỗng."], "correct": [0, 1, 2], "explanation": "Siêu khóa là tập thuộc tính định danh duy nhất bộ; khóa dự tuyển là siêu khóa tối thiểu; chỉ chọn 1 khóa dự tuyển làm khóa chính. Ràng buộc toàn vẹn thực thể cấm mọi thuộc tính của khóa chính nhận giá trị NULL, nên phương án 4 sai."}, {"id": "c3_m03", "chapter": "Chương 3: Các Ràng buộc Toàn vẹn", "type": "multiple", "question": "Khi thực hiện thao tác xóa một bộ trong quan hệ cha (được tham chiếu), những hành động nào DBMS có thể hỗ trợ để bảo toàn ràng buộc toàn vẹn tham chiếu? (Chọn tất cả các đáp án đúng)", "options": ["Từ chối xóa (RESTRICT / NO ACTION)", "Xóa lan truyền các bản ghi con tương ứng trong quan hệ tham chiếu (CASCADE)", "Đặt giá trị khóa ngoại ở các bản ghi con về NULL (SET NULL)", "Tự động tạo ra một bản ghi ngẫu nhiên mới để bù vào"], "correct": [0, 1, 2], "explanation": "Các cơ chế bảo toàn toàn vẹn tham chiếu chuẩn của SQL/DBMS gồm: RESTRICT (từ chối), CASCADE (xóa dây chuyền), SET NULL, SET DEFAULT."}, {"id": "c3_m04", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "multiple", "question": "Những phép toán nào sau đây thuộc nhóm các phép toán đại số quan hệ CƠ SỞ (nghĩa là không thể biểu diễn thông qua các phép toán cơ sở khác)? (Chọn tất cả các đáp án đúng)", "options": ["Phép chọn (Selection - σ)", "Phép chiếu (Projection - π)", "Phép tích Descartes (Cartesian Product - ×)", "Phép kết nối tự nhiên (Natural Join - ⨝)"], "correct": [0, 1, 2], "explanation": "Tập 5 phép toán cơ sở gồm: Chọn σ, Chiếu π, Hợp ∪, Trừ -, Tích Descartes × (và Đổi tên ρ). Phép nối tự nhiên ⨝ là phép toán dẫn xuất (kết hợp giữa tích Descartes, phép chọn và phép chiếu)."}, {"id": "c3_m05", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "multiple", "question": "Trong các phép nối ngoài (Outer Joins), những phát biểu nào sau đây là ĐÚNG? (Chọn tất cả các đáp án đúng)", "options": ["Phép nối trái (Left Outer Join) giữ lại tất cả các bộ của quan hệ bên trái ngay cả khi không có bộ tương ứng ở quan hệ bên phải.", "Phép nối phải (Right Outer Join) giữ lại tất cả các bộ của quan hệ bên phải.", "Phép nối toàn phần (Full Outer Join) giữ lại tất cả các bộ của cả hai quan hệ, các thuộc tính thiếu được điền giá trị NULL.", "Kết quả của phép nối ngoài luôn có ít bộ hơn phép nối trong (Inner Join)."], "correct": [0, 1, 2], "explanation": "Nối ngoài mở rộng nối trong bằng cách giữ lại các bộ không khớp và điền NULL. Do đó kết quả nối ngoài luôn có số bộ lớn hơn hoặc bằng nối trong."}, {"id": "c3_m06", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "multiple", "question": "Khi chuyển đổi một mối liên kết 1:1 giữa hai kiểu thực thể S và T sang mô hình quan hệ, những cách tiếp cận nào sau đây là HỢP LỆ? (Chọn tất cả các đáp án đúng)", "options": ["Cách tiếp cận Khóa ngoại (Foreign Key): đưa khóa chính của một bên sang bên kia làm khóa ngoại (ưu tiên bên có tham gia toàn phần).", "Cách tiếp cận Gộp quan hệ (Merged Relation): gộp S và T thành một quan hệ duy nhất (thích hợp khi cả 2 bên đều tham gia toàn phần).", "Cách tiếp cận Quan hệ liên kết (Cross-reference / Relationship relation): tạo một bảng quan hệ thứ ba chứa khóa chính của cả S và T.", "Bắt buộc luôn phải xóa bỏ một trong hai thực thể S hoặc T khỏi lược đồ."], "correct": [0, 1, 2], "explanation": "Slide C3_1 và DBMS-6 chỉ rõ 3 cách ánh xạ cho 1:1: Foreign Key approach, Merged relation approach, và Cross-reference (bảng riêng). Không bao giờ được tự tiện xóa thực thể."}, {"id": "c1_z01", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "zero", "question": "Xem xét các phát biểu sau về kiến trúc 3 mức ANSI/SPARC: Khẳng định nào sau đây là ĐÚNG?", "options": ["Lược đồ mức quan niệm phụ thuộc hoàn toàn vào hệ điều hành và thiết bị phần cứng lưu trữ cụ thể.", "Một hệ CSDL chỉ có thể có duy nhất một khung nhìn ngoài (External View) cho tất cả mọi người dùng.", "Mức trong mô tả cấu trúc logic toàn bộ dữ liệu của tổ chức mà không quan tâm tới cách thức lưu trữ vật lý.", "Tính độc lập dữ liệu logic cho phép ta thay đổi cấu trúc bảng đĩa cứng mà không cần biên dịch lại ứng dụng."], "correct": [], "explanation": "Tất cả các khẳng định trên đều SAI: Lược đồ quan niệm độc lập với phần cứng/lưu trữ vật lý; Có thể có NHIỀU khung nhìn ngoài khác nhau; Mức quan niệm mới mô tả logic toàn bộ còn mức trong mô tả cấu trúc vật lý; Độc lập dữ liệu logic liên quan đến thay đổi lược đồ quan niệm, còn thay đổi đĩa cứng là độc lập dữ liệu vật lý. Do đó KHÔNG CÓ PHƯƠNG ÁN NÀO ĐÚNG (0 đáp án đúng)."}, {"id": "c2_z01", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "zero", "question": "Xem xét các nhận định sau về các kiểu thuộc tính trong mô hình ER: Khẳng định nào sau đây là ĐÚNG?", "options": ["Thuộc tính suy diễn (Derived attribute) là thuộc tính bắt buộc phải được người dùng nhập trực tiếp từ bàn phím vào CSDL.", "Thuộc tính đa trị chỉ có thể nhận duy nhất một giá trị duy nhất cho mỗi thực thể cụ thể.", "Thuộc tính đơn giản (Simple attribute) luôn luôn có thể phân tách thành các thuộc tính thành phần nhỏ hơn có ý nghĩa.", "Thuộc tính khóa của một kiểu thực thể mạnh có thể nhận giá trị trùng lặp giữa hai thực thể phân biệt."], "correct": [], "explanation": "Tất cả các khẳng định đều SAI: Thuộc tính suy diễn được tính toán từ thuộc tính khác (không nhập trực tiếp); Thuộc tính đa trị có thể nhận nhiều giá trị; Thuộc tính đơn giản là nguyên tử không thể phân tách; Thuộc tính khóa không bao giờ trùng lặp giữa 2 thực thể. Do đó KHÔNG CÓ ĐÁP ÁN NÀO ĐÚNG (0 đáp án đúng)."}, {"id": "c2_z02", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "zero", "question": "Xem xét các nhận định sau về Kiểu thực thể yếu và Mối liên kết xác định: Nhận định nào sau đây là ĐÚNG?", "options": ["Kiểu thực thể yếu có thể tồn tại độc lập mà không cần bất kỳ kiểu thực thể chủ nào.", "Khóa bộ phận (Partial key) của thực thể yếu luôn tự mình đảm bảo tính duy nhất trên toàn bộ cơ sở dữ liệu.", "Mối liên kết xác định (Identifying relationship) giữa thực thể chủ và thực thể yếu luôn được biểu diễn bằng hình thoi nét đơn.", "Một kiểu thực thể yếu có thể tham gia bộ phận (Partial participation) vào mối liên kết xác định của nó."], "correct": [], "explanation": "Tất cả đều SAI: Thực thể yếu phụ thuộc tồn tại vào thực thể chủ; Khóa bộ phận chỉ duy nhất trong phạm vi cùng một thực thể chủ chứ không duy nhất toàn bộ CSDL; Mối liên kết xác định biểu diễn bằng hình thoi nét ĐÔI; Thực thể yếu luôn tham gia TOÀN PHẦN vào liên kết xác định. Do đó 0 CÓ PHƯƠNG ÁN NÀO ĐÚNG."}, {"id": "c3_z01", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "zero", "question": "Xem xét các phát biểu sau về các khái niệm trong mô hình quan hệ: Phát biểu nào sau đây là ĐÚNG?", "options": ["Khóa chính của một quan hệ luôn luôn chỉ được phép bao gồm duy nhất 1 thuộc tính đơn.", "Hai bộ (dòng) trong cùng một quan hệ có thể có tất cả các giá trị thuộc tính giống hệt nhau.", "Khóa ngoại của một quan hệ bắt buộc phải tham chiếu tới một bảng khác, không bao giờ được tham chiếu tới chính bảng đó.", "Thứ tự các hàng và thứ tự các cột trong một quan hệ quyết định ý nghĩa ngữ nghĩa của quan hệ đó."], "correct": [], "explanation": "Tất cả đều SAI: Khóa chính có thể gồm nhiều thuộc tính kết hợp (Composite PK); Không được trùng hai bộ hoàn chỉnh; Khóa ngoại có thể tự tham chiếu tới chính bảng đó (Recursive relationship, ví dụ MaNQL tham chiếu MaNV); Thứ tự hàng và cột trong quan hệ toán học là không quan trọng. Không có phương án nào đúng."}, {"id": "c3_z02", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "zero", "question": "Xem xét các phát biểu sau về các phép toán trong đại số quan hệ: Phát biểu nào sau đây là ĐÚNG?", "options": ["Phép chọn σ chỉ được phép áp dụng trên các quan hệ có tối đa 2 thuộc tính.", "Phép chiếu π luôn luôn làm tăng số lượng các bộ (dòng) trong quan hệ kết quả so với ban đầu.", "Phép trừ quan hệ có tính chất giao hoán, nghĩa là R - S luôn bằng S - R.", "Phép kết nối tự nhiên (Natural Join) bắt buộc người dùng phải viết rõ điều kiện kết nối dạng R.A = S.A trong câu lệnh."], "correct": [], "explanation": "Tất cả đều SAI: Phép chọn áp dụng cho bất kỳ số thuộc tính nào; Phép chiếu không bao giờ làm tăng số bộ (thậm chí có thể giảm do loại trùng lặp); Phép trừ KHÔNG giao hoán (R - S khác S - R); Phép kết nối tự nhiên tự động so khớp các thuộc tính cùng tên mà không cần điều kiện tường minh. Không có phương án nào đúng."}, {"id": "c3_z03", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "zero", "question": "Xem xét các quy tắc chuyển đổi lược đồ ER sang lược đồ quan hệ: Khẳng định nào sau đây là ĐÚNG?", "options": ["Khi chuyển đổi một mối liên kết N:M, ta luôn luôn đưa khóa của bảng này sang làm khóa ngoại ở bảng kia mà không cần tạo bảng mới.", "Thuộc tính đa trị luôn được ánh xạ bằng cách gộp tất cả các giá trị vào một chuỗi ký tự duy nhất lưu trong cột của thực thể.", "Khi chuyển đổi mối liên kết 1:N, ta bắt buộc phải đưa khóa chính của phía N sang làm khóa ngoại ở phía 1.", "Các thuộc tính của một mối liên kết N:M sẽ được chuyển trực tiếp vào bảng của một trong hai thực thể tham gia."], "correct": [], "explanation": "Tất cả các khẳng định trên đều SAI: Mối liên kết N:M BẮT BUỘC tạo quan hệ mới; Thuộc tính đa trị phải tách thành bảng riêng; Liên kết 1:N thì khóa phía 1 đưa sang phía N (chứ không phải ngược lại); Thuộc tính của liên kết N:M phải nằm ở bảng trung gian N:M. Không có khẳng định nào đúng."}, {"id": "c1_s06", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Cấp độ trừu tượng dữ liệu nào trong mô hình ANSI/SPARC là gần gũi nhất với người sử dụng cuối (end users)?", "options": ["Mức vật lý (Physical level)", "Mức khung nhìn ngoài (External / View level)", "Mức quan niệm (Conceptual level)", "Mức hệ điều hành (Operating system level)"], "correct": [1], "explanation": "Mức ngoài (External/View level) mô tả phần CSDL mà một nhóm người dùng cụ thể quan tâm, che giấu các phần còn lại."}, {"id": "c1_s07", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Tính 'độc lập dữ liệu logic' (Logical Data Independence) mang lại lợi ích gì?", "options": ["Cho phép thay đổi lược đồ quan niệm mà không cần thay đổi các lược đồ ngoài và chương trình ứng dụng.", "Cho phép thay đổi cấu trúc đĩa cứng mà không cần đổi tên bảng.", "Cho phép các bảng tự động cập nhật dữ liệu khi bị mất điện.", "Cho phép mã hóa dữ liệu độc lập với phần mềm chống virus."], "correct": [0], "explanation": "Độc lập dữ liệu logic là khả năng sửa đổi lược đồ quan niệm (thêm bảng, thêm thuộc tính) mà không làm ảnh hưởng đến các khung nhìn ngoài và chương trình ứng dụng hiện có."}, {"id": "c2_s06", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Trong mô hình ER, mối liên kết đệ quy (Recursive / Self-referencing relationship) là mối liên kết:", "options": ["Giữa 3 kiểu thực thể khác nhau cùng lúc.", "Giữa một kiểu thực thể với chính nó (các thực thể tham gia thuộc cùng một kiểu thực thể nhưng đóng các vai trò khác nhau).", "Không có bất kỳ thuộc tính nào đi kèm.", "Chỉ xảy ra đối với kiểu thực thể yếu."], "correct": [1], "explanation": "Mối liên kết đệ quy là liên kết mà cùng một kiểu thực thể tham gia nhiều lần với các vai trò khác nhau (ví dụ: Nhân viên 'Giám sát' Nhân viên khác)."}, {"id": "c2_s07", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Bản số (min, max) = (0, 1) của một kiểu thực thể E tham gia vào mối quan hệ R có ý nghĩa là:", "options": ["Mỗi thực thể thuộc E bắt buộc phải tham gia vào đúng 1 mối liên kết R.", "Mỗi thực thể thuộc E tham gia vào tối thiểu 0 mối liên kết (tham gia bộ phận) và tối đa 1 mối liên kết trong R.", "Mỗi thực thể thuộc E có thể tham gia vô số mối liên kết trong R.", "E là một kiểu thực thể yếu có bản số bằng 0."], "correct": [1], "explanation": "Ký hiệu (min, max): min = 0 nghĩa là tham gia bộ phận (optional), max = 1 nghĩa là liên kết với tối đa 1 thực thể của phía bên kia."}, {"id": "c3_s11", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "single", "question": "Một quan hệ R có n thuộc tính và m bộ. Khi áp dụng phép chọn σ_F(R) với điều kiện F, số thuộc tính của quan hệ kết quả là bao nhiêu?", "options": ["Ít hơn n thuộc tính", "Luôn luôn bằng đúng n thuộc tính", "Nhiều hơn n thuộc tính", "Bằng m thuộc tính"], "correct": [1], "explanation": "Phép chọn σ chỉ lọc các dòng (bộ) thỏa mãn điều kiện F, nó giữ nguyên tất cả các cột (thuộc tính) của quan hệ ban đầu, do đó số thuộc tính vẫn là n."}, {"id": "c3_s12", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "single", "question": "Phép toán chia trong đại số quan hệ (Division: R ÷ S) thường được ứng dụng để trả lời loại truy vấn nào trong thực tế?", "options": ["Tìm các bộ thỏa mãn ít nhất một trong các điều kiện.", "Tìm các bộ liên quan đến 'TẤT CẢ' (for all) các phần tử của một quan hệ khác.", "Tính giá trị trung bình hoặc tỷ lệ phần trăm giữa hai cột số.", "Chia nhỏ một bảng có kích thước lớn thành nhiều bảng con."], "correct": [1], "explanation": "Phép chia R ÷ S dùng cho các truy vấn có tính phổ dụng 'chứa tất cả' (ví dụ: 'Tìm nhân viên làm việc trên TẤT CẢ các dự án của phòng số 5')."}, {"id": "c3_m07", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "multiple", "question": "Xét các phép toán đại số quan hệ sau đây, những phép toán nào có tính chất GIAO HOÁN (Commutative)? (Chọn tất cả các đáp án đúng)", "options": ["Phép hợp: R ∪ S = S ∪ R", "Phép giao: R ∩ S = S ∩ R", "Phép trừ: R - S = S - R", "Phép kết nối tự nhiên: R ⨝ S = S ⨝ R"], "correct": [0, 1, 3], "explanation": "Phép hợp, phép giao và phép kết nối tự nhiên có tính giao hoán. Phép trừ KHÔNG có tính giao hoán (R - S ≠ S - R)."}, {"id": "c1_m03", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "multiple", "question": "Những thành phần nào sau đây thuộc cấu trúc bên trong của một Hệ Quản trị CSDL (DBMS)? (Chọn tất cả các đáp án đúng)", "options": ["Bộ xử lý câu truy vấn (Query Processor / Optimizer)", "Bộ quản lý lưu trữ (Storage Manager / Buffer Manager)", "Bộ quản lý giao dịch và kiểm soát đồng thời (Transaction / Concurrency Manager)", "Bo mạch chủ và bộ vi xử lý phần cứng của máy chủ"], "correct": [0, 1, 2], "explanation": "Query Processor, Storage Manager và Transaction Manager là các thành phần phần mềm cốt lõi của DBMS. Bo mạch chủ là phần cứng."}, {"id": "c2_m04", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "multiple", "question": "Trong thiết kế mô hình ER, những nhận định nào sau đây về 'Thuộc tính' là ĐÚNG? (Chọn tất cả các đáp án đúng)", "options": ["Thuộc tính lưu trữ (Stored attribute) là thuộc tính có giá trị được lưu thực tế trong CSDL.", "Thuộc tính suy diễn (Derived attribute) có giá trị được tính toán từ các thuộc tính khác (ví dụ tính Tuổi từ NgàySinh).", "Một thuộc tính có thể đồng thời vừa là thuộc tính phức hợp vừa là thuộc tính đa trị.", "Mỗi kiểu thực thể bắt buộc phải có ít nhất 10 thuộc tính."], "correct": [0, 1, 2], "explanation": "Thuộc tính lưu trữ được lưu trực tiếp; thuộc tính suy diễn được tính toán; một thuộc tính có thể là tập hợp phức hợp đa trị (ví dụ danh sách các bằng cấp gồm TênBằng và NămTốtNghiệp). Không có quy định tối thiểu 10 thuộc tính."}, {"id": "c3_z04", "chapter": "Chương 3: Các Ràng buộc Toàn vẹn", "type": "zero", "question": "Xem xét các khẳng định sau về Ràng buộc toàn vẹn thực thể (Entity Integrity): Khẳng định nào sau đây là ĐÚNG?", "options": ["Khóa chính có thể nhận giá trị NULL nếu khóa ngoại tương ứng cũng nhận giá trị NULL.", "Ràng buộc toàn vẹn thực thể chỉ áp dụng đối với các bảng có từ 3 thuộc tính trở lên.", "Nếu khóa chính gồm 2 thuộc tính {A, B}, thì thuộc tính B được phép nhận giá trị NULL miễn là A khác NULL.", "Ràng buộc toàn vẹn thực thể cho phép tồn tại hai bản ghi có cùng giá trị khóa chính nếu chúng được nhập vào các ngày khác nhau."], "correct": [], "explanation": "Tất cả các khẳng định đều SAI: Toàn vẹn thực thể quy định KHÔNG MỘT THUỘC TÍNH NÀO thuộc khóa chính được phép nhận NULL (dù là khóa đơn hay khóa kết hợp nhiều thuộc tính); Khóa chính không bao giờ được phép trùng nhau. Không có phương án nào đúng."}, {"id": "c3_z05", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "zero", "question": "Xem xét các khẳng định sau về phép tích Descartes R × S: Khẳng định nào sau đây là ĐÚNG?", "options": ["Số thuộc tính của R × S luôn bằng tích số thuộc tính của R nhân với số thuộc tính của S.", "Phép tích Descartes chỉ thực hiện được khi hai quan hệ R và S tương thích hợp.", "Số bộ (dòng) của R × S luôn bằng tổng số bộ của R cộng với số bộ của S.", "Phép tích Descartes tự động loại bỏ các dòng có giá trị thuộc tính chung không bằng nhau."], "correct": [], "explanation": "Tất cả đều SAI: Số thuộc tính của R × S bằng TỔNG degree(R) + degree(S) (chứ không phải tích); Tích Descartes không yêu cầu tương thích hợp; Số bộ bằng TÍCH n * m (chứ không phải tổng); Tích Descartes ghép mọi dòng của R với mọi dòng của S mà không lọc gì cả. Không có phương án nào đúng."}, {"id": "c1_s08", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Mô hình kiến trúc 3 tầng (Three-tier Client/Server Architecture) thường gồm những tầng nào sau đây?", "options": ["Tầng giao diện người dùng (User Interface / Client) - Tầng ứng dụng / logic nghiệp vụ (Application / Business Logic) - Tầng cơ sở dữ liệu (Database Server)", "Tầng mạng (Network) - Tầng truyền tải (Transport) - Tầng ứng dụng (Application)", "Tầng vật lý (Hardware) - Tầng hệ điều hành (OS) - Tầng CSDL (DBMS)", "Tầng bảng (Table) - Tầng khung nhìn (View) - Tầng chỉ mục (Index)"], "correct": [0], "explanation": "Kiến trúc 3 tầng chuẩn gồm: Client (giao diện hiển thị), Application Server (xử lý logic nghiệp vụ và trung gian), Database Server (lưu trữ và quản trị dữ liệu)."}, {"id": "c1_s09", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "single", "question": "Tính chất 'Bền vững' (Durability) trong các tính chất ACID của giao dịch CSDL bảo đảm điều gì?", "options": ["Giao dịch được thực thi cô lập không bị ảnh hưởng bởi các giao dịch khác.", "Dữ liệu của giao dịch một khi đã commit thành công sẽ tồn tại vĩnh viễn trong CSDL ngay cả khi hệ thống bị sập nguồn hoặc mất điện.", "Giao dịch hoặc là hoàn thành tất cả các thao tác, hoặc không thực hiện thao tác nào.", "Dữ liệu luôn bảo đảm đúng các ràng buộc toàn vẹn trước và sau giao dịch."], "correct": [1], "explanation": "Durability (Bền vững) bảo đảm rằng khi một transaction đã COMMIT, những thay đổi đối với CSDL sẽ được bảo toàn vĩnh viễn trên thiết bị lưu trữ bền vững dù gặp sự cố sập hệ thống."}, {"id": "c2_s08", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Trong mô hình EER, khi nào một mối liên kết tổng quát hóa / chuyên biệt hóa được coi là 'Toàn phần' (Total Specialization)?", "options": ["Khi mọi thực thể trong lớp cha (superclass) bắt buộc phải thuộc về ít nhất một lớp con (subclass).", "Khi lớp cha chỉ có duy nhất đúng một lớp con.", "Khi các lớp con có chung toàn bộ mọi thuộc tính.", "Khi tất cả các lớp con đều có cùng số lượng thực thể như nhau."], "correct": [0], "explanation": "Chuyên biệt hóa toàn phần (Total / Mandatory specialization) đòi hỏi mọi thực thể trong superclass phải là thành viên của ít nhất một subclass (biểu diễn bằng đường nét đôi)."}, {"id": "c2_s09", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "single", "question": "Trong mô hình EER, khái niệm 'Kiểu hợp / Phân loại' (Union Type / Category) được sử dụng khi:", "options": ["Một lớp con kế thừa từ nhiều lớp cha có cùng khóa chính.", "Một lớp con biểu diễn tập hợp con của phép hợp các thực thể từ các kiểu thực thể cha KHÁC NHAU (vốn có các khóa chính khác nhau).", "Hai thực thể độc lập cùng chia sẻ một thuộc tính đa trị.", "Một thực thể có hơn 100 thực thể con."], "correct": [1], "explanation": "Category / Union type (ví dụ: OWNER có thể là PERSON, BANK, hoặc COMPANY) dùng để mô hình hóa một thực thể là thành viên của phép hợp nhiều lớp cha khác nhau có cấu trúc và khóa chính khác nhau (thường yêu cầu một khóa thay thế - Surrogate key khi ánh xạ sang quan hệ)."}, {"id": "c3_s13", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "single", "question": "Cho quan hệ R(A, B, C, D) với khóa chính là (A, B). Có thể có nhiều nhất bao nhiêu siêu khóa (Superkeys) của R?", "options": ["1 siêu khóa", "2 siêu khóa", "4 siêu khóa", "16 siêu khóa"], "correct": [2], "explanation": "Mọi tập con chứa khóa chính (A, B) đều là siêu khóa. Các thuộc tính còn lại là {C, D} có 2^2 = 4 tập con: {A,B}, {A,B,C}, {A,B,D}, {A,B,C,D}. Vậy có 4 siêu khóa chứa (A, B)."}, {"id": "c3_s14", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "single", "question": "Phép kết nối bằng (Equi-Join) khác với phép kết nối tự nhiên (Natural Join) ở điểm cơ bản nào?", "options": ["Phép kết nối bằng chỉ áp dụng cho bảng có 1 cột.", "Phép kết nối tự nhiên tự động loại bỏ cột thuộc tính trùng lặp trong kết quả, còn phép kết nối bằng vẫn giữ lại cả hai cột tham gia so sánh.", "Phép kết nối tự nhiên không sử dụng điều kiện bằng.", "Phép kết nối bằng luôn tạo ra ít dòng hơn phép kết nối tự nhiên."], "correct": [1], "explanation": "Equi-join giữ lại cả 2 cột của điều kiện nối R.A = S.A trong kết quả, trong khi Natural Join (⨝) tự động ghép trên các cột cùng tên và chỉ giữ lại một bản sao của cột nối."}, {"id": "c2_m05", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "multiple", "question": "Những phát biểu nào sau đây về 'Bậc của mối liên kết' (Relationship Degree) là ĐÚNG? (Chọn tất cả các đáp án đúng)", "options": ["Bậc của mối liên kết là số lượng các kiểu thực thể tham gia vào mối liên kết đó.", "Mối liên kết phổ biến nhất trong thực tế là mối liên kết hai ngôi (Binary relationship - bậc 2).", "Mối liên kết bậc 1 (Unary) là mối liên kết đệ quy giữa các thực thể thuộc cùng một kiểu thực thể.", "Mối liên kết bậc 3 (Ternary) luôn luôn có thể thay thế bằng 3 mối liên kết bậc 2 mà không làm mất mát ngữ nghĩa."], "correct": [0, 1, 2], "explanation": "Bậc là số kiểu thực thể tham gia; bậc 2 phổ biến nhất; bậc 1 là đệ quy. Khẳng định 4 sai vì một mối liên kết 3 ngôi (Ternary) nói chung KHÔNG thể phân rã thành 3 liên kết 2 ngôi mà vẫn bảo toàn ngữ nghĩa ràng buộc 3 bên đồng thời."}, {"id": "c3_m08", "chapter": "Chương 3: Đại số Quan hệ (Relational Algebra)", "type": "multiple", "question": "Những phép toán nào sau đây trong đại số quan hệ có thể làm GIẢM số lượng bộ (tuples / dòng) so với quan hệ đầu vào? (Chọn tất cả các đáp án đúng)", "options": ["Phép chọn (Selection - σ)", "Phép chiếu (Projection - π)", "Phép trừ (Difference: R - S)", "Phép tích Descartes (Cartesian Product: R × S)"], "correct": [0, 1, 2], "explanation": "Phép chọn lọc bớt dòng; Phép chiếu loại bỏ các dòng trùng lặp nên có thể giảm dòng; Phép trừ loại bỏ các dòng thuộc S nên có thể giảm dòng. Tích Descartes R × S luôn tạo ra n * m dòng (với n, m >= 1 thì n*m >= n và m, không giảm)."}, {"id": "c3_m09", "chapter": "Chương 3: Chuyển đổi ER sang Lược đồ Quan hệ", "type": "multiple", "question": "Khi chuyển đổi mô hình EER với quan hệ chuyên biệt hóa (Specialization) của lớp cha C(k, a1..an) và các lớp con S1, S2 theo Tùy chọn 8A (Option 8A: Superclass and Subclasses relations), những phát biểu nào sau đây là ĐÚNG? (Chọn tất cả các đáp án đúng)", "options": ["Tạo một quan hệ L cho lớp cha C với các thuộc tính {k, a1..an} và khóa chính là k.", "Tạo một quan hệ Li cho mỗi lớp con Si với các thuộc tính gồm {k} kết hợp với các thuộc tính riêng của Si, và khóa chính là k.", "Thuộc tính k trong mỗi bảng lớp con Li đóng vai trò vừa là khóa chính vừa là khóa ngoại trỏ về bảng lớp cha L.", "Tùy chọn này chỉ áp dụng được khi quan hệ chuyên biệt hóa là Disjoint (rời nhau), không áp dụng được cho Overlapping."], "correct": [0, 1, 2], "explanation": "Tùy chọn 8A tạo bảng lớp cha và các bảng lớp con, khóa chính của lớp con là k (vừa là PK vừa là FK trỏ về cha). Slide DBMS-6 chỉ rõ Option 8A hoạt động cho BẤT KỲ chuyên biệt hóa nào (cả Disjoint và Overlapping, Total và Partial)."}, {"id": "c1_z02", "chapter": "Chương 1: Tổng quan về CSDL & DBMS", "type": "zero", "question": "Xét các khẳng định sau về Ngôn ngữ Thao tác Dữ liệu (DML): Khẳng định nào sau đây là ĐÚNG?", "options": ["Câu lệnh DDL DROP TABLE là một câu lệnh thuộc nhóm DML.", "DML thủ tục (Procedural DML) chỉ cho phép người dùng chỉ rõ dữ liệu cần lấy là gì mà không cần chỉ định cách thức lấy.", "DML cấm hoàn toàn việc sửa đổi các giá trị dữ liệu đã được lưu trong các bảng.", "DML là ngôn ngữ chỉ dành riêng cho Quản trị viên hệ thống (DBA), người dùng và lập trình viên không được phép sử dụng."], "correct": [], "explanation": "Tất cả các khẳng định trên đều SAI: DROP TABLE thuộc DDL (không phải DML); DML phi thủ tục (Declarative/Non-procedural như SQL) mới là chỉ rõ dữ liệu cần lấy mà không cần chỉ cách lấy; DML cho phép INSERT, UPDATE, DELETE thoải mái; DML được sử dụng rộng rãi bởi lập trình viên và người dùng cuối. Do đó KHÔNG CÓ PHƯƠNG ÁN NÀO ĐÚNG (0 đáp án đúng)."}, {"id": "c2_z03", "chapter": "Chương 2: Mô hình Thực thể - Liên kết (ER Model)", "type": "zero", "question": "Xét các khẳng định sau về các thành phần trong biểu đồ ER: Khẳng định nào sau đây là ĐÚNG?", "options": ["Thuộc tính phức hợp bắt buộc phải được biểu diễn bằng hình thoi nét đôi.", "Một mối liên kết hai ngôi có bản số 1:1 bắt buộc cả hai bên thực thể tham gia đều phải tham gia toàn phần.", "Hình chữ nhật nét đơn trong sơ đồ ER dùng để biểu diễn một tập thuộc tính đa trị.", "Đường nét đôi giữa thực thể và liên kết chỉ ra rằng thực thể đó có bản số tối thiểu (min) bằng 0."], "correct": [], "explanation": "Tất cả đều SAI: Thuộc tính phức hợp biểu diễn bằng hình oval có các nhánh con; Liên kết 1:1 không bắt buộc cả 2 bên tham gia toàn phần (có thể partial cả hai); Hình chữ nhật nét đơn biểu diễn kiểu thực thể thông thường; Đường nét đôi chỉ ra tham gia toàn phần nghĩa là min = 1 (chứ không phải 0). Không có phương án nào đúng."}, {"id": "c3_z06", "chapter": "Chương 3: Mô hình Quan hệ (Relational Model)", "type": "zero", "question": "Xét các phát biểu sau về Khóa ngoại (Foreign Key): Phát biểu nào sau đây là ĐÚNG?", "options": ["Tất cả các giá trị của khóa ngoại bắt buộc phải là duy nhất và không được phép trùng lặp trong cùng một bảng.", "Khóa ngoại bắt buộc phải có cùng tên với thuộc tính khóa chính ở bảng được tham chiếu.", "Nếu một bảng có khóa ngoại thì bảng đó không thể có khóa chính.", "Khóa ngoại không bao giờ được phép tham gia vào thành phần của khóa chính trong cùng một bảng."], "correct": [], "explanation": "Tất cả đều SAI: Khóa ngoại có thể trùng lặp nhiều lần (ví dụ nhiều nhân viên cùng thuộc phòng số 5); Khóa ngoại không bắt buộc cùng tên (chỉ cần cùng miền giá trị); Một bảng hoàn toàn có thể có cả PK và FK; Khóa ngoại hoàn toàn có thể là một thành phần của PK (ví dụ trong bảng N:M hoặc bảng thực thể yếu). Không có khẳng định nào đúng."}];
+    const ALL_ER_PROBLEMS = [{"id": "er_company", "title": "Bài tập 1: Cơ sở Dữ liệu CÔNG TY (COMPANY Database - Slide C2_1 & C3_1)", "scenario": "Cho lược đồ thực thể - liên kết (ER) của CSDL 'CÔNG TY' như sau:\n- **Kiểu thực thể mạnh**:\n  + `NHANVIEN` (<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong)\n  + `DONVI` (<u>MaDV</u>, TenDV, DiaDiem [đa trị])\n  + `DUAN` (<u>MaDA</u>, TenDA, DiaDiemDA)\n- **Kiểu thực thể yếu**:\n  + `THANNHAN` (<u>TenTN</u> [khóa bộ phận], NgaySinh, GioiTinh, QuanHe) có mối liên kết xác định `CoThanNhan` (1:N) với `NHANVIEN`.\n- **Các mối liên kết**:\n  + `LamViecCho` (1:N): giữa `DONVI` (1) và `NHANVIEN` (N), tham gia toàn phần ở phía `NHANVIEN`.\n  + `QuanLy` (1:1): giữa `DONVI` và `NHANVIEN` (có thuộc tính `NgayBatDau`), `DONVI` tham gia toàn phần (mỗi đơn vị phải có 1 trưởng phòng).\n  + `KiemSoat` (1:N): giữa `DONVI` (1) và `DUAN` (N).\n  + `ThamGia` (N:M): giữa `NHANVIEN` và `DUAN` (có thuộc tính `SoGio`).\n  + `GiamSat` (1:N đệ quy): trên `NHANVIEN` (một nhân viên có thể có một người giám sát).\n\n**Yêu cầu**: Hãy áp dụng đúng quy trình chuyển đổi chuẩn từ mô hình ER sang mô hình quan hệ (gồm các bước xử lý thực thể mạnh, thực thể yếu, liên kết 1:1, 1:N, N:M, liên kết đệ quy, và thuộc tính đa trị) để xác định lược đồ cơ sở dữ liệu quan hệ chính xác nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 480\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <defs>\n    <filter id=\"shadow\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\">\n      <feDropShadow dx=\"2\" dy=\"2\" stdDeviation=\"3\" flood-opacity=\"0.15\"/>\n    </filter>\n  </defs>\n  <!-- Background grid subtle -->\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  \n  <!-- ENTITY: NHANVIEN -->\n  <g class=\"node entity\" filter=\"url(#shadow)\">\n    <rect x=\"50\" y=\"160\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n    <text x=\"120\" y=\"190\" text-anchor=\"middle\" fill=\"#ffffff\" font-weight=\"bold\" font-size=\"14\">NHANVIEN</text>\n  </g>\n  <!-- Attributes of NHANVIEN -->\n  <ellipse cx=\"60\" cy=\"90\" rx=\"45\" ry=\"18\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"60\" y=\"94\" text-anchor=\"middle\" font-size=\"12\" text-decoration=\"underline\" font-weight=\"600\">MaNV</text>\n  <line x1=\"85\" y1=\"106\" x2=\"100\" y2=\"160\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <ellipse cx=\"160\" cy=\"90\" rx=\"42\" ry=\"18\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"160\" y=\"94\" text-anchor=\"middle\" font-size=\"12\">HoTen</text>\n  <line x1=\"150\" y1=\"107\" x2=\"135\" y2=\"160\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- ENTITY: DONVI -->\n  <g class=\"node entity\" filter=\"url(#shadow)\">\n    <rect x=\"420\" y=\"160\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n    <text x=\"485\" y=\"190\" text-anchor=\"middle\" fill=\"#ffffff\" font-weight=\"bold\" font-size=\"14\">DONVI</text>\n  </g>\n  <!-- Attributes of DONVI -->\n  <ellipse cx=\"440\" cy=\"90\" rx=\"42\" ry=\"18\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"440\" y=\"94\" text-anchor=\"middle\" font-size=\"12\" text-decoration=\"underline\" font-weight=\"600\">MaDV</text>\n  <line x1=\"450\" y1=\"107\" x2=\"470\" y2=\"160\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- Multivalued Attribute DiaDiem -->\n  <ellipse cx=\"540\" cy=\"90\" rx=\"48\" ry=\"20\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <ellipse cx=\"540\" cy=\"90\" rx=\"43\" ry=\"16\" fill=\"none\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"540\" y=\"94\" text-anchor=\"middle\" font-size=\"12\">DiaDiem</text>\n  <line x1=\"530\" y1=\"109\" x2=\"505\" y2=\"160\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- RELATION: LamViecCho (1:N) -->\n  <polygon points=\"300,165 340,185 300,205 260,185\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"190\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"bold\" fill=\"#fff\">LamViecCho</text>\n  <!-- Double line to NHANVIEN (total participation) -->\n  <line x1=\"190\" y1=\"182\" x2=\"260\" y2=\"182\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"190\" y1=\"188\" x2=\"260\" y2=\"188\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"210\" y=\"175\" font-size=\"12\" font-weight=\"bold\" fill=\"#ef4444\">N (Toàn phần)</text>\n  <!-- Line to DONVI -->\n  <line x1=\"340\" y1=\"185\" x2=\"420\" y2=\"185\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"385\" y=\"175\" font-size=\"12\" font-weight=\"bold\" fill=\"#3b82f6\">1</text>\n\n  <!-- RELATION: QuanLy (1:1) -->\n  <polygon points=\"300,245 340,265 300,285 260,265\" fill=\"#10b981\" stroke=\"#059669\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"269\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"bold\" fill=\"#fff\">QuanLy</text>\n  <!-- Line to NHANVIEN -->\n  <line x1=\"190\" y1=\"205\" x2=\"265\" y2=\"255\" stroke=\"#059669\" stroke-width=\"2\"/>\n  <text x=\"210\" y=\"240\" font-size=\"11\" font-weight=\"bold\">1</text>\n  <!-- Line to DONVI (Double line: DONVI total) -->\n  <line x1=\"335\" y1=\"255\" x2=\"425\" y2=\"205\" stroke=\"#059669\" stroke-width=\"2\"/>\n  <line x1=\"341\" y1=\"261\" x2=\"431\" y2=\"211\" stroke=\"#059669\" stroke-width=\"2\"/>\n  <text x=\"375\" y=\"245\" font-size=\"11\" font-weight=\"bold\" fill=\"#ef4444\">1 (Toàn phần)</text>\n  <!-- Attribute NgayBatDau of QuanLy -->\n  <ellipse cx=\"300\" cy=\"325\" rx=\"46\" ry=\"16\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"329\" text-anchor=\"middle\" font-size=\"11\">NgayBatDau</text>\n  <line x1=\"300\" y1=\"285\" x2=\"300\" y2=\"309\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- ENTITY: DUAN -->\n  <g class=\"node entity\" filter=\"url(#shadow)\">\n    <rect x=\"680\" y=\"160\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n    <text x=\"745\" y=\"190\" text-anchor=\"middle\" fill=\"#ffffff\" font-weight=\"bold\" font-size=\"14\">DUAN</text>\n  </g>\n  <!-- RELATION: KiemSoat (1:N between DONVI and DUAN) -->\n  <polygon points=\"615,165 650,185 615,205 580,185\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"615\" y=\"190\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"bold\" fill=\"#fff\">KiemSoat</text>\n  <line x1=\"550\" y1=\"185\" x2=\"580\" y2=\"185\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"560\" y=\"175\" font-size=\"11\" font-weight=\"bold\">1</text>\n  <line x1=\"650\" y1=\"185\" x2=\"680\" y2=\"185\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"665\" y=\"175\" font-size=\"11\" font-weight=\"bold\">N</text>\n\n  <!-- RELATION: ThamGia (N:M between NHANVIEN and DUAN) -->\n  <polygon points=\"485,350 525,370 485,390 445,370\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"485\" y=\"374\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"bold\" fill=\"#fff\">ThamGia</text>\n  <path d=\"M 120 210 L 120 370 L 445 370\" fill=\"none\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"140\" y=\"365\" font-size=\"12\" font-weight=\"bold\">N</text>\n  <path d=\"M 745 210 L 745 370 L 525 370\" fill=\"none\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"720\" y=\"365\" font-size=\"12\" font-weight=\"bold\">M</text>\n  <!-- Attribute SoGio -->\n  <ellipse cx=\"485\" cy=\"430\" rx=\"35\" ry=\"16\" fill=\"#f3e8ff\" stroke=\"#7c3aed\" stroke-width=\"1.5\"/>\n  <text x=\"485\" y=\"434\" text-anchor=\"middle\" font-size=\"11\">SoGio</text>\n  <line x1=\"485\" y1=\"390\" x2=\"485\" y2=\"414\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- WEAK ENTITY: THANNHAN -->\n  <rect x=\"50\" y=\"370\" width=\"130\" height=\"46\" rx=\"4\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <rect x=\"54\" y=\"374\" width=\"122\" height=\"38\" rx=\"3\" fill=\"none\" stroke=\"#be185d\" stroke-width=\"1.5\"/>\n  <text x=\"115\" y=\"398\" text-anchor=\"middle\" fill=\"#ffffff\" font-weight=\"bold\" font-size=\"13\">THANNHAN</text>\n\n  <!-- IDENTIFYING RELATION: CoThanNhan -->\n  <polygon points=\"115,260 145,280 115,300 85,280\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <polygon points=\"115,264 140,280 115,296 90,280\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\"/>\n  <text x=\"115\" y=\"284\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">Co</text>\n  <!-- Double lines to THANNHAN -->\n  <line x1=\"112\" y1=\"300\" x2=\"112\" y2=\"370\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"118\" y1=\"300\" x2=\"118\" y2=\"370\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"115\" y1=\"210\" x2=\"115\" y2=\"260\" stroke=\"#be185d\" stroke-width=\"2\"/>\n\n  <!-- RECURSIVE: GiamSat -->\n  <path d=\"M 50 180 C 10 180, 10 210, 50 205\" fill=\"none\" stroke=\"#64748b\" stroke-width=\"2\"/>\n  <polygon points=\"20,195 30,190 30,200\" fill=\"#64748b\"/>\n  <text x=\"15\" y=\"170\" font-size=\"10\" font-weight=\"bold\" fill=\"#475569\">GiamSat (1:N)</text>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec, MaNV_GiamSat)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "Đúng 100% chuẩn thuật toán 7 bước: 1:1 đưa MaNV sang DONVI vì DONVI tham gia toàn phần; 1:N đưa MaDV sang NHANVIEN; N:M tạo bảng THAMGIA_DUAN; đa trị DiaDiem tách bảng riêng; thực thể yếu THANNHAN lấy MaNV + TenTN làm PK; đệ quy giám sát có MaNV_GiamSat."}, {"label": "Phương án B (Lỗi ở quan hệ 1:1 và thuộc tính đa trị)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec, MaNV_GiamSat, NgayNhanChuc)\nDONVI(<u>MaDV</u>, TenDV, DiaDiem)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Thuộc tính đa trị DiaDiem bị để trực tiếp trong DONVI (vi phạm 1NF); đưa thuộc tính NgayNhanChuc vào NHANVIEN thay vì DONVI (DONVI tham gia toàn phần vào QuanLy nên phải đưa MaNV_TruongPhong và NgayNhanChuc vào DONVI để tránh giá trị NULL)."}, {"label": "Phương án C (Lỗi ở khóa chính của Thực thể yếu THANNHAN)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec, MaNV_GiamSat)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nTHANNHAN(<u>TenTN</u>, NgaySinh, GioiTinh, QuanHe, MaNV)", "notes": "SAI: Bảng THANNHAN chỉ lấy TenTN làm khóa chính và coi MaNV là thuộc tính thông thường. Thực thể yếu không có khóa riêng, TenTN chỉ là partial key; bắt buộc PK phải là tổ hợp {MaNV, TenTN}."}, {"label": "Phương án D (Lỗi ở quan hệ nhiều - nhiều THAMGIA_DUAN)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec, MaNV_GiamSat, MaDA, SoGio)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Mối liên kết N:M giữa NHANVIEN và DUAN không được tách thành bảng riêng mà lại gộp MaDA và SoGio vào NHANVIEN, chỉ cho phép một nhân viên tham gia tối đa 1 dự án (vi phạm bản số N:M)."}, {"label": "Phương án E (Lỗi ở quan hệ 1:N LamViecCho và KiemSoat bị ngược chiều)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaNV_GiamSat)\nDONVI(<u>MaDV</u>, TenDV, MaNV_LamViec, MaDA_KiemSoat, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Quan hệ 1:N bị đặt khóa ngược chiều: đưa MaNV và MaDA sang bảng DONVI (phía 1), khiến mỗi đơn vị chỉ có thể có đúng 1 nhân viên và 1 dự án!"}, {"label": "Phương án F (Lỗi thiếu liên kết đệ quy giám sát và thiếu khóa DONVI_DIADIEM)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV</u>, DiaDiem)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Thiếu thuộc tính MaNV_GiamSat cho liên kết đệ quy; Bảng DONVI_DIADIEM chỉ đặt MaDV làm khóa chính, dẫn tới mỗi đơn vị chỉ có tối đa 1 địa điểm (không lưu được đa trị)."}, {"label": "Phương án G (Lỗi gộp sai thực thể yếu và tách bảng thừa cho 1:N)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaNV_GiamSat)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA)\nLAMVIEC_DONVI(<u>MaNV</u>, MaDV)\nKIEMSOAT_DUAN(<u>MaDA</u>, MaDV)\nTHAMGIA_DUAN(<u>MaNV, MaDA</u>, SoGio)\nNHANVIEN_THANNHAN(<u>MaNV</u>, TenTN, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Tách thêm bảng dư thừa không cần thiết cho quan hệ 1:N (LAMVIEC_DONVI, KIEMSOAT_DUAN); Bảng NHANVIEN_THANNHAN chỉ có MaNV làm PK khiến mỗi nhân viên chỉ có thể có đúng 1 thân nhân."}, {"label": "Phương án H (Lỗi sai khóa chính bảng N:M THAMGIA_DUAN)", "code": "NHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, DiaChi, GioiTinh, Luong, MaDV_LamViec, MaNV_GiamSat)\nDONVI(<u>MaDV</u>, TenDV, MaNV_TruongPhong, NgayNhanChuc)\nDONVI_DIADIEM(<u>MaDV, DiaDiem</u>)\nDUAN(<u>MaDA</u>, TenDA, DiaDiemDA, MaDV_KiemSoat)\nTHAMGIA_DUAN(<u>MaNV</u>, MaDA, SoGio)\nTHANNHAN(<u>MaNV, TenTN</u>, NgaySinh, GioiTinh, QuanHe)", "notes": "SAI: Bảng THAMGIA_DUAN chỉ chọn MaNV làm khóa chính duy nhất thay vì tổ hợp {MaNV, MaDA}, dẫn tới một nhân viên chỉ có thể tham gia duy nhất 1 dự án."}], "correct_option": 0, "step_by_step_explanation": "### Phân tích chi tiết quy trình chuyển đổi ER sang Quan hệ (7 Bước chuẩn):\n1. **Bước 1 (Thực thể mạnh)**:\n   - `NHANVIEN`: tạo bảng `NHANVIEN(MaNV, HoTen, NgaySinh, DiaChi, GioiTinh, Luong)`. Khóa chính: `MaNV`.\n   - `DONVI`: tạo bảng `DONVI(MaDV, TenDV)`. Khóa chính: `MaDV`.\n   - `DUAN`: tạo bảng `DUAN(MaDA, TenDA, DiaDiemDA)`. Khóa chính: `MaDA`.\n2. **Bước 2 (Thực thể yếu THANNHAN)**:\n   - Thực thể yếu phụ thuộc vào `NHANVIEN` qua liên kết xác định `CoThanNhan`. Khóa bộ phận là `TenTN`.\n   - Tạo bảng `THANNHAN(MaNV, TenTN, NgaySinh, GioiTinh, QuanHe)`. Khóa chính là tổ hợp `{MaNV, TenTN}`, trong đó `MaNV` là khóa ngoại trỏ về `NHANVIEN`.\n3. **Bước 3 (Liên kết 1:1 QuanLy)**:\n   - `DONVI` tham gia toàn phần (mọi đơn vị đều có trưởng phòng), `NHANVIEN` tham gia bộ phận.\n   - Nguyên tắc: đưa khóa của bên tham gia bộ phận (`MaNV`) sang bên tham gia toàn phần (`DONVI`) làm khóa ngoại, kèm theo thuộc tính của liên kết (`NgayNhanChuc/NgayBatDau`) để tránh các giá trị NULL.\n   - Thêm vào `DONVI`: `MaNV_TruongPhong`, `NgayNhanChuc`.\n4. **Bước 4 (Liên kết 1:N LamViecCho, KiemSoat, GiamSat)**:\n   - `LamViecCho`: Đơn vị (1) - Nhân viên (N) -> Thêm `MaDV_LamViec` vào bảng `NHANVIEN`.\n   - `KiemSoat`: Đơn vị (1) - Dự án (N) -> Thêm `MaDV_KiemSoat` vào bảng `DUAN`.\n   - `GiamSat`: Nhân viên (1) - Nhân viên (N) [đệ quy] -> Thêm `MaNV_GiamSat` vào bảng `NHANVIEN`.\n5. **Bước 5 (Liên kết N:M ThamGia)**:\n   - Giữa `NHANVIEN` và `DUAN`, có thuộc tính `SoGio`.\n   - Tạo bảng mới `THAMGIA_DUAN(MaNV, MaDA, SoGio)`. Khóa chính là tổ hợp `{MaNV, MaDA}`, các khóa ngoại trỏ tương ứng về `NHANVIEN` và `DUAN`.\n6. **Bước 6 (Thuộc tính đa trị DiaDiem của DONVI)**:\n   - Tạo bảng mới `DONVI_DIADIEM(MaDV, DiaDiem)`. Khóa chính là `{MaDV, DiaDiem}`, trong đó `MaDV` là khóa ngoại trỏ về `DONVI`.\n\n**Kết luận**: **Phương án A** là phương án duy nhất thỏa mãn trọn vẹn và tối ưu toàn bộ các nguyên tắc trên."}, {"id": "er_store", "title": "Bài tập 2: Cơ sở Dữ liệu BÁN HÀNG & NHÀ CUNG CẤP (Slide C2_1 - Bài tập 4)", "scenario": "Cho lược đồ ER quản lý 'BÁN HÀNG' với mô tả:\n- **Kiểu thực thể mạnh**:\n  + `HANGHOA` (<u>MaHang</u>, TenHang, DonGia)\n  + `NHACUNGCAP` (<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien, SoDienThoai [thuộc tính đa trị, có nhiều số])\n  + `KHACHHANG` (<u>MaKH</u>, HoTen, DiaChi, DienThoai)\n  + `NHANVIEN` (<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\n  + `HOADON` (<u>SoHD</u>, NgayLap, TongTien)\n- **Các mối liên kết**:\n  + `CungCap` (1:N): giữa `NHACUNGCAP` (1) và `HANGHOA` (N) (một nhà cung cấp cung cấp nhiều mặt hàng, mỗi mặt hàng do 1 NCC cung cấp).\n  + `LapHoaDon` (1:N): giữa `NHANVIEN` (1) và `HOADON` (N) (mỗi hóa đơn do 1 nhân viên lập).\n  + `MuaHang` (1:N): giữa `KHACHHANG` (1) và `HOADON` (N) (mỗi hóa đơn thuộc về 1 khách hàng).\n  + `ChiTietHD` (N:M): giữa `HOADON` và `HANGHOA`, có các thuộc tính: `SoLuong`, `DonGiaBan`.\n\n**Yêu cầu**: Hãy xác định phương án chuyển đổi sang mô hình quan hệ đúng chuẩn mực nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 420\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  <!-- NCC -->\n  <rect x=\"50\" y=\"50\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"120\" y=\"80\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">NHACUNGCAP</text>\n  <!-- Multivalued SDT -->\n  <ellipse cx=\"60\" cy=\"140\" rx=\"45\" ry=\"18\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <ellipse cx=\"60\" cy=\"140\" rx=\"40\" ry=\"14\" fill=\"none\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"60\" y=\"144\" text-anchor=\"middle\" font-size=\"11\">SoDienThoai</text>\n  <line x1=\"80\" y1=\"122\" x2=\"95\" y2=\"100\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- HANGHOA -->\n  <rect x=\"350\" y=\"50\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"80\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">HANGHOA</text>\n\n  <!-- CungCap (1:N) -->\n  <polygon points=\"255,55 285,75 255,95 225,75\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"79\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">CungCap</text>\n  <line x1=\"190\" y1=\"75\" x2=\"225\" y2=\"75\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"200\" y=\"68\" font-size=\"11\" font-weight=\"bold\">1</text>\n  <line x1=\"285\" y1=\"75\" x2=\"350\" y2=\"75\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"320\" y=\"68\" font-size=\"11\" font-weight=\"bold\">N</text>\n\n  <!-- HOADON -->\n  <rect x=\"350\" y=\"240\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"270\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">HOADON</text>\n\n  <!-- ChiTietHD (N:M) -->\n  <polygon points=\"415,135 445,155 415,175 385,155\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"159\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">ChiTietHD</text>\n  <line x1=\"415\" y1=\"100\" x2=\"415\" y2=\"135\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"425\" y=\"120\" font-size=\"11\" font-weight=\"bold\">M</text>\n  <line x1=\"415\" y1=\"175\" x2=\"415\" y2=\"240\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"425\" y=\"210\" font-size=\"11\" font-weight=\"bold\">N</text>\n  <!-- Attributes SoLuong, DonGiaBan -->\n  <ellipse cx=\"530\" cy=\"155\" rx=\"50\" ry=\"16\" fill=\"#f3e8ff\" stroke=\"#7c3aed\" stroke-width=\"1.5\"/>\n  <text x=\"530\" y=\"159\" text-anchor=\"middle\" font-size=\"11\">SoLuong, DonGia</text>\n  <line x1=\"445\" y1=\"155\" x2=\"480\" y2=\"155\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- NHANVIEN -->\n  <rect x=\"50\" y=\"240\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"270\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">NHANVIEN</text>\n  <!-- LapHoaDon (1:N) -->\n  <polygon points=\"255,245 285,265 255,285 225,265\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"269\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">LapHD</text>\n  <line x1=\"180\" y1=\"265\" x2=\"225\" y2=\"265\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"195\" y=\"258\" font-size=\"11\" font-weight=\"bold\">1</text>\n  <line x1=\"285\" y1=\"265\" x2=\"350\" y2=\"265\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"315\" y=\"258\" font-size=\"11\" font-weight=\"bold\">N</text>\n\n  <!-- KHACHHANG -->\n  <rect x=\"650\" y=\"240\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"270\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">KHACHHANG</text>\n  <!-- MuaHang (1:N) -->\n  <polygon points=\"555,245 585,265 555,285 525,265\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"555\" y=\"269\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">MuaHang</text>\n  <line x1=\"650\" y1=\"265\" x2=\"585\" y2=\"265\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"620\" y=\"258\" font-size=\"11\" font-weight=\"bold\">1</text>\n  <line x1=\"525\" y1=\"265\" x2=\"480\" y2=\"265\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"500\" y=\"258\" font-size=\"11\" font-weight=\"bold\">N</text>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC, SoDienThoai</u>)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)\nCHITIET_HOADON(<u>SoHD, MaHang</u>, SoLuong, DonGiaBan)", "notes": "Đúng 100%: Tách bảng riêng cho thuộc tính đa trị SoDienThoai; 1:N đặt MaNCC vào HANGHOA; 1:N đặt MaKH và MaNV vào HOADON; N:M ChiTietHD tách thành bảng riêng có PK là {SoHD, MaHang}."}, {"label": "Phương án B (Lỗi gộp thuộc tính đa trị vào bảng NCC)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien, SoDienThoai)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)\nCHITIET_HOADON(<u>SoHD, MaHang</u>, SoLuong, DonGiaBan)", "notes": "SAI: Để thuộc tính đa trị SoDienThoai trực tiếp trong NHACUNGCAP (vi phạm quy tắc chuyển đổi bước 6 và vi phạm dạng chuẩn 1NF)."}, {"label": "Phương án C (Lỗi khóa chính của bảng CHITIET_HOADON)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC, SoDienThoai</u>)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)\nCHITIET_HOADON(<u>SoHD</u>, MaHang, SoLuong, DonGiaBan)", "notes": "SAI: Bảng CHITIET_HOADON chỉ lấy SoHD làm khóa chính, dẫn đến mỗi hóa đơn chỉ có thể mua duy nhất một mặt hàng."}, {"label": "Phương án D (Lỗi đặt khóa ngoại ngược chiều ở HOADON)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC, SoDienThoai</u>)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai, SoHD)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong, SoHD)\nHOADON(<u>SoHD</u>, NgayLap, TongTien)\nCHITIET_HOADON(<u>SoHD, MaHang</u>, SoLuong, DonGiaBan)", "notes": "SAI: Đưa SoHD sang KHACHHANG và NHANVIEN (ngược chiều 1:N), làm cho mỗi khách hàng và mỗi nhân viên chỉ gắn với đúng 1 hóa đơn trong toàn bộ hệ thống!"}, {"label": "Phương án E (Lỗi gộp N:M vào HANGHOA)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC, SoDienThoai</u>)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC, SoHD, SoLuong, DonGiaBan)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)", "notes": "SAI: Gộp mối liên kết N:M ChiTietHD vào HANGHOA thay vì tạo bảng riêng, khiến mỗi mặt hàng chỉ được bán trong duy nhất một hóa đơn."}, {"label": "Phương án F (Lỗi thiếu khóa kết hợp ở bảng điện thoại NCC)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC</u>, SoDienThoai)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)\nCHITIET_HOADON(<u>SoHD, MaHang</u>, SoLuong, DonGiaBan)", "notes": "SAI: Bảng NHACUNGCAP_DIENTHOAI chỉ lấy MaNCC làm khóa chính đơn, dẫn đến không thể lưu nhiều hơn một số điện thoại cho mỗi nhà cung cấp."}, {"label": "Phương án G (Lỗi tách bảng thừa không cần thiết cho 1:N)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>MaNCC, SoDienThoai</u>)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia)\nCUNGCAP(<u>MaHang</u>, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien)\nLAP_HOADON(<u>SoHD</u>, MaNV)\nMUAHANG(<u>SoHD</u>, MaKH)\nCHITIET_HOADON(<u>SoHD, MaHang</u>, SoLuong, DonGiaBan)", "notes": "SAI: Tạo các bảng quan hệ dư thừa CUNGCAP, LAP_HOADON, MUAHANG cho liên kết 1:N thay vì đưa khóa ngoại vào bảng phía N theo nguyên tắc chuẩn."}, {"label": "Phương án H (Lỗi đặt sai khóa chính ở cả CHITIET_HOADON và NHACUNGCAP_DIENTHOAI)", "code": "NHACUNGCAP(<u>MaNCC</u>, TenNCC, DiaChi, NguoiDaiDien)\nNHACUNGCAP_DIENTHOAI(<u>SoDienThoai</u>, MaNCC)\nHANGHOA(<u>MaHang</u>, TenHang, DonGia, MaNCC)\nKHACHHANG(<u>MaKH</u>, HoTen, DiaChi, DienThoai)\nNHANVIEN(<u>MaNV</u>, HoTen, NgaySinh, NgayVaoLam, Luong)\nHOADON(<u>SoHD</u>, NgayLap, TongTien, MaKH, MaNV)\nCHITIET_HOADON(<u>MaHang</u>, SoHD, SoLuong, DonGiaBan)", "notes": "SAI: Bảng CHITIET_HOADON chỉ có MaHang làm PK; Bảng NHACUNGCAP_DIENTHOAI chỉ có SoDienThoai làm PK đơn lẻ."}], "correct_option": 0, "step_by_step_explanation": "### Quy trình ánh xạ chuẩn ER sang Quan hệ cho CSDL Bán hàng:\n1. **Thực thể mạnh**:\n   - `NHACUNGCAP(MaNCC, TenNCC, DiaChi, NguoiDaiDien)`, PK: `MaNCC`.\n   - `HANGHOA(MaHang, TenHang, DonGia)`, PK: `MaHang`.\n   - `KHACHHANG(MaKH, HoTen, DiaChi, DienThoai)`, PK: `MaKH`.\n   - `NHANVIEN(MaNV, HoTen, NgaySinh, NgayVaoLam, Luong)`, PK: `MaNV`.\n   - `HOADON(SoHD, NgayLap, TongTien)`, PK: `SoHD`.\n2. **Thuộc tính đa trị `SoDienThoai` của `NHACUNGCAP`**:\n   - Tách bảng `NHACUNGCAP_DIENTHOAI(MaNCC, SoDienThoai)`. Khóa chính là tổ hợp `{MaNCC, SoDienThoai}`, `MaNCC` là FK trỏ về `NHACUNGCAP`.\n3. **Liên kết 1:N**:\n   - `CungCap` (1:N): Đưa `MaNCC` sang bảng `HANGHOA` làm FK.\n   - `LapHoaDon` (1:N): Đưa `MaNV` sang bảng `HOADON` làm FK.\n   - `MuaHang` (1:N): Đưa `MaKH` sang bảng `HOADON` làm FK.\n   -> Bảng `HOADON` có thêm hai FK: `MaNV` và `MaKH`.\n4. **Liên kết N:M `ChiTietHD`**:\n   - Giữa `HOADON` và `HANGHOA`, có thuộc tính `SoLuong`, `DonGiaBan`.\n   - Tạo bảng `CHITIET_HOADON(SoHD, MaHang, SoLuong, DonGiaBan)`. Khóa chính là kết hợp `{SoHD, MaHang}`.\n\n**Phương án đúng là Phương án A**."}, {"id": "er_library", "title": "Bài tập 3: Cơ sở Dữ liệu THƯ VIỆN & MƯỢN TRẢ (Slide C2_1 - Bài tập 3 & Giáo trình)", "scenario": "Cho lược đồ ER quản lý 'THƯ VIỆN' gồm:\n- **Kiểu thực thể mạnh**:\n  + `SACH` (<u>MaSach</u>, TenSach, NamXB)\n  + `TACGIA` (<u>MaTG</u>, TenTG)\n  + `NHAXUATBAN` (<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\n  + `NHANH_THUVIEN` (<u>MaNhanh</u>, TenNhanh, DiaChi)\n  + `DOCGIA` (<u>SoThe</u>, HoTen, DiaChi, DienThoai)\n- **Kiểu thực thể yếu**:\n  + `BANSAO_SACH` (<u>SoBanSao</u> [khóa bộ phận], TinhTrangSach) phụ thuộc vào thực thể chủ `SACH` qua liên kết xác định `CoBanSao` (1:N).\n- **Các mối liên kết**:\n  + `XuatBan` (1:N): giữa `NHAXUATBAN` (1) và `SACH` (N).\n  + `DongTacGia` (N:M): giữa `SACH` và `TACGIA`.\n  + `LuuTru` (1:N): giữa `NHANH_THUVIEN` (1) và `BANSAO_SACH` (N) (mỗi bản sao sách được lưu trữ tại một nhánh cụ thể).\n  + `MuonTra` (N:M): giữa `DOCGIA` và `BANSAO_SACH`, có các thuộc tính: `NgayMuon`, `NgayHenTra`, `NgayTra`.\n\n**Yêu cầu**: Hãy chọn phương án chuyển đổi sang mô hình quan hệ chính xác nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 420\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  <!-- NXB -->\n  <rect x=\"50\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">NHAXUATBAN</text>\n  <!-- SACH -->\n  <rect x=\"350\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">SACH</text>\n  <!-- TACGIA -->\n  <rect x=\"650\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">TACGIA</text>\n\n  <!-- XuatBan 1:N -->\n  <polygon points=\"255,42 285,62 255,82 225,62\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"66\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">XuatBan</text>\n  <line x1=\"180\" y1=\"62\" x2=\"225\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"62\" x2=\"350\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- DongTacGia N:M -->\n  <polygon points=\"555,42 585,62 555,82 525,62\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"555\" y=\"66\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">VietSach</text>\n  <line x1=\"480\" y1=\"62\" x2=\"525\" y2=\"62\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"585\" y1=\"62\" x2=\"650\" y2=\"62\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n\n  <!-- WEAK ENTITY: BANSAO_SACH -->\n  <rect x=\"350\" y=\"200\" width=\"130\" height=\"46\" rx=\"4\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <rect x=\"354\" y=\"204\" width=\"122\" height=\"38\" rx=\"3\" fill=\"none\" stroke=\"#be185d\" stroke-width=\"1.5\"/>\n  <text x=\"415\" y=\"228\" text-anchor=\"middle\" fill=\"#ffffff\" font-weight=\"bold\" font-size=\"12\">BANSAO_SACH</text>\n  <!-- Identifying rel CoBanSao -->\n  <polygon points=\"415,115 440,135 415,155 390,135\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <polygon points=\"415,119 435,135 415,151 395,135\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\"/>\n  <line x1=\"415\" y1=\"85\" x2=\"415\" y2=\"115\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"412\" y1=\"155\" x2=\"412\" y2=\"200\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"418\" y1=\"155\" x2=\"418\" y2=\"200\" stroke=\"#be185d\" stroke-width=\"2\"/>\n\n  <!-- NHANH_THUVIEN -->\n  <rect x=\"50\" y=\"200\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"228\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"12\">NHANH_THUVIEN</text>\n  <!-- LuuTru 1:N -->\n  <polygon points=\"255,202 285,222 255,242 225,222\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"226\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">LuuTru</text>\n  <line x1=\"180\" y1=\"222\" x2=\"225\" y2=\"222\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"222\" x2=\"350\" y2=\"222\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- DOCGIA -->\n  <rect x=\"350\" y=\"340\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"368\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">DOCGIA</text>\n  <!-- MuonTra N:M -->\n  <polygon points=\"415,265 445,285 415,305 385,285\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"289\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">MuonTra</text>\n  <line x1=\"415\" y1=\"246\" x2=\"415\" y2=\"265\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"415\" y1=\"305\" x2=\"415\" y2=\"340\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoBanSao, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "Đúng 100%: BANSAO_SACH là thực thể yếu có PK {MaSach, SoBanSao} và FK MaNhanh; SACH có FK MaNXB; SACH_TACGIA có PK {MaSach, MaTG}; MUONTRA nhận khóa chính đầy đủ {MaSach, SoBanSao, SoThe, NgayMuon}."}, {"label": "Phương án B (Lỗi khóa chính thực thể yếu BANSAO_SACH)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>SoBanSao</u>, TinhTrangSach, MaSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>SoBanSao, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "SAI: Bảng BANSAO_SACH chỉ lấy SoBanSao làm khóa chính đơn độc. Bản sao sách là thực thể yếu, SoBanSao chỉ là số thứ tự trong 1 đầu sách, bắt buộc phải kết hợp với MaSach."}, {"label": "Phương án C (Lỗi ở quan hệ tác giả SACH_TACGIA)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB, MaTG)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoBanSao, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "SAI: Gộp MaTG trực tiếp vào bảng SACH, khiến một cuốn sách chỉ có thể do đúng 1 tác giả viết (vi phạm mối liên kết N:M)."}, {"label": "Phương án D (Lỗi khóa chính bảng MUONTRA thiếu NgayMuon)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoBanSao, SoThe</u>, NgayMuon, NgayHenTra, NgayTra)", "notes": "SAI: Khóa chính của MUONTRA thiếu NgayMuon. Nếu chỉ để {MaSach, SoBanSao, SoThe} thì một độc giả không bao giờ có thể mượn lại cùng một cuốn sách ở các lần khác nhau trong tương lai."}, {"label": "Phương án E (Lỗi đặt sai khóa ngoại quan hệ XuatBan)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai, MaSach)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoBanSao, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "SAI: Đưa MaSach vào bảng NHAXUATBAN (ngược chiều 1:N), làm mỗi NXB chỉ xuất bản được 1 cuốn sách duy nhất."}, {"label": "Phương án F (Lỗi đặt khóa ngoại LuuTru ở bảng NHANH_THUVIEN)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi, MaSach, SoBanSao)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoBanSao, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "SAI: Đưa khóa của bản sao sách vào bảng NHANH_THUVIEN, làm mỗi chi nhánh thư viện chỉ lưu trữ được đúng 1 cuốn sách duy nhất!"}, {"label": "Phương án G (Lỗi gộp sai bản sao vào bảng SACH)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB, SoBanSao, TinhTrangSach, MaNhanh)\nSACH_TACGIA(<u>MaSach, MaTG</u>)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>MaSach, SoThe, NgayMuon</u>, NgayHenTra, NgayTra)", "notes": "SAI: Gộp thực thể yếu BANSAO_SACH vào bảng SACH, làm mất khả năng quản lý nhiều bản sao tại các chi nhánh khác nhau."}, {"label": "Phương án H (Lỗi thiếu bảng trung gian SACH_TACGIA và sai khóa MUONTRA)", "code": "NHAXUATBAN(<u>MaNXB</u>, TenNXB, DiaChi, DienThoai)\nTACGIA(<u>MaTG</u>, TenTG, MaSach)\nSACH(<u>MaSach</u>, TenSach, NamXB, MaNXB)\nNHANH_THUVIEN(<u>MaNhanh</u>, TenNhanh, DiaChi)\nBANSAO_SACH(<u>MaSach, SoBanSao</u>, TinhTrangSach, MaNhanh)\nDOCGIA(<u>SoThe</u>, HoTen, DiaChi, DienThoai)\nMUONTRA(<u>SoBanSao</u>, MaSach, SoThe, NgayMuon, NgayHenTra, NgayTra)", "notes": "SAI: Đưa MaSach vào TACGIA (mỗi tác giả chỉ viết 1 cuốn); Bảng MUONTRA chỉ lấy SoBanSao làm PK."}], "correct_option": 0, "step_by_step_explanation": "### Phân tích chi tiết từng bảng trong CSDL Thư viện:\n1. `SACH` và `NHAXUATBAN`: Liên kết 1:N -> Đưa `MaNXB` sang bảng `SACH` làm khóa ngoại.\n2. `SACH` và `TACGIA`: Liên kết N:M -> Bắt buộc tạo bảng trung gian `SACH_TACGIA(MaSach, MaTG)` với khóa chính là `{MaSach, MaTG}`.\n3. Thực thể yếu `BANSAO_SACH`: Có khóa bộ phận là `SoBanSao`, phụ thuộc vào `SACH`. Khóa chính của `BANSAO_SACH` là `{MaSach, SoBanSao}`.\n4. `NHANH_THUVIEN` và `BANSAO_SACH`: Liên kết 1:N -> Đưa `MaNhanh` sang bảng `BANSAO_SACH` làm khóa ngoại.\n5. Mối quan hệ mượn trả `MUONTRA`: Giữa `DOCGIA` (khóa `SoThe`) và `BANSAO_SACH` (khóa `{MaSach, SoBanSao}`). Một độc giả có thể mượn cùng 1 bản sao sách nhiều lần vào các ngày khác nhau, do đó khóa chính phải là `{MaSach, SoBanSao, SoThe, NgayMuon}`.\n\n**Phương án A chính xác tuyệt đối.**"}, {"id": "er_exam", "title": "Bài tập 4: Quản lý THI TUYỂN SINH (Slide C2_1 - Bài tập 1)", "scenario": "Cho mô tả bài toán 'Thi tuyển sinh' (UET):\n- **Kiểu thực thể**:\n  + `THISINH` (<u>SBD</u>, HoTen, NgaySinh)\n  + `TRUONG` (<u>MaTruong</u>, TenTruong, DiaChi)\n  + `NGANH` (<u>MaNganh</u>, TenNganh, MoTa)\n  + `KHOITHI` (<u>MaKhoi</u>, MoTa)\n  + `MONTHI` (<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\n  + `PHONGTHI` (<u>MaPhong</u>, DiaDiem, SoLuong)\n  + `CB_COITHI` (<u>MaCB</u>, HoTen)\n- **Các mối liên kết**:\n  + `ThuocTruong` (1:N): giữa `TRUONG` (1) và `NGANH` (N).\n  + `ThuocKhoi` (1:N): giữa `KHOITHI` (1) và `NGANH` (N).\n  + `Khoi_Mon` (N:M): giữa `KHOITHI` và `MONTHI` (mỗi khối có nhiều môn, một môn thuộc nhiều khối).\n  + `DangKy` (N:M): giữa `THISINH` và `NGANH`, có thuộc tính: `ThuTuNV` (nguyện vọng 1, 2) và `DiemThi`.\n  + `XepPhong` (1:N): giữa `PHONGTHI` (1) và `THISINH` (N) (mỗi phòng thi có tối đa 30 thí sinh, mỗi thí sinh ở 1 phòng).\n  + `PhanCongCoiThi` (N:M): giữa `PHONGTHI` và `CB_COITHI` (mỗi phòng có 2 cán bộ coi thi), có thuộc tính: `VaiTro` (Giám thị 1, Giám thị 2).\n  + `GiamSat` (1:N đệ quy): trên `CB_COITHI` (một cán bộ giám sát tối đa 6 cán bộ giám thị).\n\n**Yêu cầu**: Hãy xác định phương án chuyển đổi sang mô hình quan hệ chính xác nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 420\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  <rect x=\"50\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">TRUONG</text>\n  <rect x=\"350\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">NGANH</text>\n  <rect x=\"650\" y=\"40\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"68\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">KHOITHI</text>\n\n  <!-- ThuocTruong 1:N -->\n  <polygon points=\"255,42 285,62 255,82 225,62\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"66\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">ThuocTrg</text>\n  <line x1=\"180\" y1=\"62\" x2=\"225\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"62\" x2=\"350\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- ThuocKhoi 1:N -->\n  <polygon points=\"555,42 585,62 555,82 525,62\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"555\" y=\"66\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">ThuocKhoi</text>\n  <line x1=\"650\" y1=\"62\" x2=\"585\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"525\" y1=\"62\" x2=\"480\" y2=\"62\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- THISINH -->\n  <rect x=\"350\" y=\"190\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"218\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">THISINH</text>\n\n  <!-- DangKy N:M -->\n  <polygon points=\"415,100 445,120 415,140 385,120\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"124\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">DangKy</text>\n  <line x1=\"415\" y1=\"85\" x2=\"415\" y2=\"100\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"415\" y1=\"140\" x2=\"415\" y2=\"190\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n\n  <!-- PHONGTHI -->\n  <rect x=\"50\" y=\"190\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"218\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">PHONGTHI</text>\n\n  <!-- XepPhong 1:N -->\n  <polygon points=\"255,192 285,212 255,232 225,212\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"216\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">XepPhong</text>\n  <line x1=\"180\" y1=\"212\" x2=\"225\" y2=\"212\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"212\" x2=\"350\" y2=\"212\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- CB_COITHI -->\n  <rect x=\"50\" y=\"320\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"348\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">CB_COITHI</text>\n\n  <!-- PhanCongCoiThi N:M -->\n  <polygon points=\"115,250 145,270 115,290 85,270\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"274\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">CoiThi</text>\n  <line x1=\"115\" y1=\"235\" x2=\"115\" y2=\"250\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"115\" y1=\"290\" x2=\"115\" y2=\"320\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n\n  <!-- MONTHI -->\n  <rect x=\"650\" y=\"190\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"218\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">MONTHI</text>\n\n  <!-- KhoiMon N:M -->\n  <polygon points=\"715,100 745,120 715,140 685,120\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"124\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">Khoi_Mon</text>\n  <line x1=\"715\" y1=\"85\" x2=\"715\" y2=\"100\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"715\" y1=\"140\" x2=\"715\" y2=\"190\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "Đúng 100%: 1:N ThuocTruong và ThuocKhoi đưa MaTruong, MaKhoi vào NGANH; 1:N XepPhong đưa MaPhong vào THISINH; N:M DangKy tách bảng THISINH_DANGKY có PK {SBD, MaNganh}; N:M Khoi_Mon có PK {MaKhoi, MaMon}; N:M PhanCongCoiThi có PK {MaPhong, MaCB}; đệ quy giám sát có MaCB_GiamSat."}, {"label": "Phương án B (Lỗi gộp DangKy vào THISINH)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong, MaNganh, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "SAI: Gộp MaNganh, ThuTuNV, DiemThi trực tiếp vào THISINH, khiến mỗi thí sinh chỉ đăng ký được 1 nguyện vọng (trong khi đề bài cho phép đăng ký 2 nguyện vọng)."}, {"label": "Phương án C (Lỗi ở quan hệ xếp phòng thi ngược chiều)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong, SBD)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "SAI: Đưa SBD sang bảng PHONGTHI (ngược chiều 1:N), làm mỗi phòng thi chỉ chứa được duy nhất 1 thí sinh!"}, {"label": "Phương án D (Lỗi khóa chính bảng PHANCONG_COITHI)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong</u>, MaCB, VaiTro)", "notes": "SAI: Bảng PHANCONG_COITHI chỉ lấy MaPhong làm khóa chính, dẫn đến mỗi phòng thi chỉ phân công được đúng 1 giám thị (đề bài yêu cầu mỗi phòng có 2 cán bộ)."}, {"label": "Phương án E (Lỗi gộp bảng KHOI_MON vào KHOITHI)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa, MaMon)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "SAI: Gộp MaMon vào KHOITHI, khiến mỗi khối thi chỉ có đúng 1 môn thi (trong khi đề bài quy định mỗi khối có 3 môn thi)."}, {"label": "Phương án F (Lỗi thiếu liên kết đệ quy giám sát CB_COITHI)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "SAI: Bảng CB_COITHI bị thiếu thuộc tính MaCB_GiamSat để thể hiện mối liên kết đệ quy giám sát giữa cán bộ giám sát và các giám thị."}, {"label": "Phương án G (Lỗi tách bảng thừa cho 1:N của NGANH và TRUONG)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa)\nTRUONG_NGANH(<u>MaNganh</u>, MaTruong)\nKHOI_NGANH(<u>MaNganh</u>, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD, MaNganh</u>, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaPhong, MaCB</u>, VaiTro)", "notes": "SAI: Tách thêm hai bảng thừa TRUONG_NGANH và KHOI_NGANH cho mối quan hệ 1:N thay vì đưa khóa ngoại vào bảng NGANH theo chuẩn."}, {"label": "Phương án H (Lỗi sai khóa chính bảng THISINH_DANGKY)", "code": "TRUONG(<u>MaTruong</u>, TenTruong, DiaChi)\nKHOITHI(<u>MaKhoi</u>, MoTa)\nMONTHI(<u>MaMon</u>, TenMon, ThoiGian, HinhThuc)\nKHOI_MON(<u>MaKhoi, MaMon</u>)\nNGANH(<u>MaNganh</u>, TenNganh, MoTa, MaTruong, MaKhoi)\nPHONGTHI(<u>MaPhong</u>, DiaDiem, SoLuong)\nTHISINH(<u>SBD</u>, HoTen, NgaySinh, MaPhong)\nTHISINH_DANGKY(<u>SBD</u>, MaNganh, ThuTuNV, DiemThi)\nCB_COITHI(<u>MaCB</u>, HoTen, MaCB_GiamSat)\nPHANCONG_COITHI(<u>MaCB</u>, MaPhong, VaiTro)", "notes": "SAI: Bảng THISINH_DANGKY chỉ lấy SBD làm khóa chính đơn, khiến mỗi thí sinh không thể lưu được nguyện vọng thứ hai."}], "correct_option": 0, "step_by_step_explanation": "Phương án A là phương án chuẩn xác 100%: đầy đủ các khóa chính, khóa ngoại, bảng trung gian cho liên kết N:M, và thuộc tính đệ quy giám sát."}, {"id": "er_university", "title": "Bài tập 5: Cơ sở Dữ liệu ĐÀO TẠO ĐẠI HỌC (Hình ảnh uni-database.png)", "scenario": "Cho sơ đồ ER quản lý 'ĐÀO TẠO ĐẠI HỌC' (từ ảnh vẽ thực tế trong thư mục excersises):\n- **Kiểu thực thể mạnh**:\n  + `STUDENT` (<u>StudentNumber</u>, SocialId [candidate key], Name, Address, Phone)\n  + `DEPARTMENT` (<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\n  + `COURSE` (<u>CourseNumber</u>, CourseName, Description, Credits, Level)\n- **Kiểu thực thể yếu**:\n  + `SECTION` (<u>SectionNumber</u> [khóa bộ phận], Semester, Year) phụ thuộc vào `COURSE` qua liên kết xác định `Course_Section` (1:N).\n- **Các mối liên kết**:\n  + `Major` (1:N): giữa `DEPARTMENT` (1) và `STUDENT` (N) (khoa quản lý ngành học chính của sinh viên).\n  + `Minor` (1:N): giữa `DEPARTMENT` (1) và `STUDENT` (N) (khoa quản lý ngành phụ).\n  + `Offers` (1:N): giữa `DEPARTMENT` (1) và `COURSE` (N) (khoa giảng dạy môn học).\n  + `GradeReport` (N:M): giữa `STUDENT` và `SECTION`, có các thuộc tính: `LetterGrade`, `NumericGrade`.\n\n**Yêu cầu**: Hãy xác định phương án chuyển đổi sang mô hình quan hệ chính xác nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 420\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  <!-- DEPT -->\n  <rect x=\"50\" y=\"50\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"78\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">DEPARTMENT</text>\n  <!-- COURSE -->\n  <rect x=\"350\" y=\"50\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"78\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">COURSE</text>\n  <!-- Offers 1:N -->\n  <polygon points=\"255,52 285,72 255,92 225,72\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"76\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">Offers</text>\n  <line x1=\"180\" y1=\"72\" x2=\"225\" y2=\"72\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"72\" x2=\"350\" y2=\"72\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- WEAK: SECTION -->\n  <rect x=\"650\" y=\"50\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <rect x=\"654\" y=\"54\" width=\"122\" height=\"37\" rx=\"3\" fill=\"none\" stroke=\"#be185d\" stroke-width=\"1.5\"/>\n  <text x=\"715\" y=\"78\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">SECTION</text>\n  <!-- Identifying rel -->\n  <polygon points=\"555,52 585,72 555,92 525,72\" fill=\"#ec4899\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <polygon points=\"555,56 580,72 555,88 530,72\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\"/>\n  <line x1=\"480\" y1=\"72\" x2=\"525\" y2=\"72\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"585\" y1=\"70\" x2=\"650\" y2=\"70\" stroke=\"#be185d\" stroke-width=\"2\"/>\n  <line x1=\"585\" y1=\"74\" x2=\"650\" y2=\"74\" stroke=\"#be185d\" stroke-width=\"2\"/>\n\n  <!-- STUDENT -->\n  <rect x=\"50\" y=\"240\" width=\"130\" height=\"45\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"268\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"13\">STUDENT</text>\n  <!-- Major 1:N -->\n  <polygon points=\"85,140 115,160 85,180 55,160\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"85\" y=\"164\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">Major</text>\n  <line x1=\"85\" y1=\"95\" x2=\"85\" y2=\"140\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"85\" y1=\"180\" x2=\"85\" y2=\"240\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- Minor 1:N -->\n  <polygon points=\"145,140 175,160 145,180 115,160\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"145\" y=\"164\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">Minor</text>\n  <line x1=\"145\" y1=\"95\" x2=\"145\" y2=\"140\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"145\" y1=\"180\" x2=\"145\" y2=\"240\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- GradeReport N:M -->\n  <polygon points=\"415,240 455,262 415,285 375,262\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"266\" text-anchor=\"middle\" font-size=\"9\" font-weight=\"bold\" fill=\"#fff\">GradeReport</text>\n  <line x1=\"180\" y1=\"262\" x2=\"375\" y2=\"262\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <path d=\"M 715 95 L 715 262 L 455 262\" fill=\"none\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone, MajorDeptCode, MinorDeptCode)\nGRADE_REPORT(<u>StudentNumber, CourseNumber, SectionNumber</u>, LetterGrade, NumericGrade)", "notes": "Đúng 100%: SECTION là thực thể yếu có PK {CourseNumber, SectionNumber}; STUDENT có 2 FK MajorDeptCode và MinorDeptCode trỏ về DEPARTMENT; GRADE_REPORT có PK {StudentNumber, CourseNumber, SectionNumber}."}, {"label": "Phương án B (Lỗi khóa chính thực thể yếu SECTION)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>SectionNumber</u>, Semester, Year, CourseNumber)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone, MajorDeptCode, MinorDeptCode)\nGRADE_REPORT(<u>StudentNumber, SectionNumber</u>, LetterGrade, NumericGrade)", "notes": "SAI: Bảng SECTION chỉ lấy SectionNumber làm khóa chính đơn độc. Lớp học phần là thực thể yếu của Môn học, SectionNumber chỉ là mã lớp nội bộ (ví dụ Lớp 1, Lớp 2) nên phải kết hợp với CourseNumber."}, {"label": "Phương án C (Lỗi gộp hai quan hệ Major và Minor vào DEPARTMENT)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone, StudentNumber_Major, StudentNumber_Minor)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone)\nGRADE_REPORT(<u>StudentNumber, CourseNumber, SectionNumber</u>, LetterGrade, NumericGrade)", "notes": "SAI: Đưa StudentNumber sang bảng DEPARTMENT (ngược chiều 1:N), làm cho mỗi khoa chỉ có thể có đúng 1 sinh viên học ngành chính và 1 sinh viên học ngành phụ!"}, {"label": "Phương án D (Lỗi khóa chính GRADE_REPORT thiếu CourseNumber)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone, MajorDeptCode, MinorDeptCode)\nGRADE_REPORT(<u>StudentNumber, SectionNumber</u>, CourseNumber, LetterGrade, NumericGrade)", "notes": "SAI: Khóa ngoại trỏ đến SECTION bắt buộc phải gồm cả 2 thành phần {CourseNumber, SectionNumber} mới định danh được một bộ trong SECTION. Để CourseNumber ngoài PK sẽ gây lỗi toàn vẹn tham chiếu."}, {"label": "Phương án E (Lỗi gộp GRADE_REPORT vào SECTION)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year, StudentNumber, LetterGrade, NumericGrade)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone, MajorDeptCode, MinorDeptCode)", "notes": "SAI: Gộp kết quả điểm vào SECTION, khiến mỗi lớp học phần chỉ có đúng 1 sinh viên tham gia."}, {"label": "Phương án F (Lỗi đặt sai khóa ngoại quan hệ Offers)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone, CourseNumber)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone, MajorDeptCode, MinorDeptCode)\nGRADE_REPORT(<u>StudentNumber, CourseNumber, SectionNumber</u>, LetterGrade, NumericGrade)", "notes": "SAI: Đưa CourseNumber sang DEPARTMENT (ngược chiều 1:N), khiến mỗi khoa chỉ mở được 1 môn học."}, {"label": "Phương án G (Lỗi tách bảng thừa cho Major và Minor)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber, SectionNumber</u>, Semester, Year)\nSTUDENT(<u>StudentNumber</u>, SocialId, Name, Address, Phone)\nSTUDENT_MAJOR(<u>StudentNumber</u>, DeptCode)\nSTUDENT_MINOR(<u>StudentNumber</u>, DeptCode)\nGRADE_REPORT(<u>StudentNumber, CourseNumber, SectionNumber</u>, LetterGrade, NumericGrade)", "notes": "SAI: Tạo các bảng thừa STUDENT_MAJOR và STUDENT_MINOR cho mối liên kết 1:N thay vì đưa thẳng khóa ngoại vào STUDENT."}, {"label": "Phương án H (Lỗi sai khóa chính toàn bộ các bảng)", "code": "DEPARTMENT(<u>DeptCode</u>, DeptName, OfficeNumber, Phone)\nCOURSE(<u>CourseNumber</u>, CourseName, Description, Credits, Level, DeptCode)\nSECTION(<u>CourseNumber</u>, SectionNumber, Semester, Year)\nSTUDENT(<u>SocialId</u>, StudentNumber, Name, Address, Phone, MajorDeptCode, MinorDeptCode)\nGRADE_REPORT(<u>CourseNumber</u>, StudentNumber, SectionNumber, LetterGrade, NumericGrade)", "notes": "SAI: SECTION chỉ lấy CourseNumber làm PK; GRADE_REPORT chỉ lấy CourseNumber làm PK."}], "correct_option": 0, "step_by_step_explanation": "Phương án A chuyển đổi hoàn hảo mô hình Đại học: SECTION là thực thể yếu có PK kết hợp, STUDENT chứa 2 khóa ngoại khoa chính và khoa phụ, GRADE_REPORT có PK gồm 3 thuộc tính."}, {"id": "er_movie", "title": "Bài tập 6: Cơ sở Dữ liệu PHIM ĐIỆN ẢNH (Hình ảnh c2 ex.jpg)", "scenario": "Cho lược đồ ER quản lý 'PHIM & NGHỆ SĨ' (từ ảnh vẽ thực tế c2 ex.jpg trong thư mục excersises):\n- **Kiểu thực thể mạnh**:\n  + `MOVIE` (<u>Title</u>, <u>YearOfRelease</u> [khóa phức hợp gồm Tựa phim và Năm phát hành], LengthMinutes, Quote, Genres [thuộc tính đa trị thể loại phim])\n  + `ACTORS` (<u>ActorName</u>, BirthDate)\n  + `DIRECTORS` (<u>DirectorName</u>, BirthDate)\n  + `COMPANIES` (<u>CompanyName</u>, Address)\n- **Các mối liên kết**:\n  + `Appear` (N:M): giữa `MOVIE` và `ACTORS`, có thuộc tính: `Role`, `SpokenQuote`.\n  + `Direct` (1:N): giữa `DIRECTORS` (1) và `MOVIE` (N) (mỗi bộ phim do 1 đạo diễn chỉ đạo).\n  + `Produce` (1:N): giữa `COMPANIES` (1) và `MOVIE` (N) (mỗi bộ phim do 1 hãng phát hành sản xuất).\n  + `ActIn` (N:M): giữa `DIRECTORS` và `MOVIE` (khi đạo diễn đồng thời tham gia diễn xuất trong phim).\n\n**Yêu cầu**: Hãy xác định phương án chuyển đổi sang mô hình quan hệ chính xác nhất trong 8 phương án dưới đây.", "svg_diagram": "<svg viewBox=\"0 0 850 420\" xmlns=\"http://www.w3.org/2000/svg\" class=\"er-svg\">\n  <rect width=\"100%\" height=\"100%\" fill=\"var(--svg-bg, #f8fafc)\" rx=\"12\"/>\n  <!-- MOVIE -->\n  <rect x=\"350\" y=\"50\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"80\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">MOVIE</text>\n  <!-- Multivalued Genres -->\n  <ellipse cx=\"415\" cy=\"140\" rx=\"45\" ry=\"18\" fill=\"#e0f2fe\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <ellipse cx=\"415\" cy=\"140\" rx=\"40\" ry=\"14\" fill=\"none\" stroke=\"#0284c7\" stroke-width=\"1.5\"/>\n  <text x=\"415\" y=\"144\" text-anchor=\"middle\" font-size=\"11\">Genres</text>\n  <line x1=\"415\" y1=\"100\" x2=\"415\" y2=\"122\" stroke=\"#64748b\" stroke-width=\"1.5\"/>\n\n  <!-- ACTORS -->\n  <rect x=\"650\" y=\"50\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"715\" y=\"80\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">ACTORS</text>\n  <!-- Appear N:M -->\n  <polygon points=\"555,52 585,75 555,98 525,75\" fill=\"#8b5cf6\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <text x=\"555\" y=\"79\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">Appear</text>\n  <line x1=\"480\" y1=\"75\" x2=\"525\" y2=\"75\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n  <line x1=\"585\" y1=\"75\" x2=\"650\" y2=\"75\" stroke=\"#7c3aed\" stroke-width=\"2\"/>\n\n  <!-- DIRECTORS -->\n  <rect x=\"350\" y=\"260\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"290\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">DIRECTORS</text>\n  <!-- Direct 1:N -->\n  <polygon points=\"415,175 440,195 415,215 390,195\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"415\" y=\"199\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">Direct</text>\n  <line x1=\"415\" y1=\"158\" x2=\"415\" y2=\"175\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"415\" y1=\"215\" x2=\"415\" y2=\"260\" stroke=\"#d97706\" stroke-width=\"2\"/>\n\n  <!-- COMPANIES -->\n  <rect x=\"50\" y=\"50\" width=\"130\" height=\"50\" rx=\"4\" fill=\"#3b82f6\" stroke=\"#1d4ed8\" stroke-width=\"2\"/>\n  <text x=\"115\" y=\"80\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"bold\" font-size=\"14\">COMPANIES</text>\n  <!-- Produce 1:N -->\n  <polygon points=\"255,52 285,75 255,98 225,75\" fill=\"#f59e0b\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <text x=\"255\" y=\"79\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#fff\">Produce</text>\n  <line x1=\"180\" y1=\"75\" x2=\"225\" y2=\"75\" stroke=\"#d97706\" stroke-width=\"2\"/>\n  <line x1=\"285\" y1=\"75\" x2=\"350\" y2=\"75\" stroke=\"#d97706\" stroke-width=\"2\"/>\n</svg>", "options": [{"label": "Phương án A (Chính xác chuẩn mực)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, DirectorName, CompanyName)\nMOVIE_GENRES(<u>Title, YearOfRelease, Genre</u>)\nMOVIE_ACTORS(<u>Title, YearOfRelease, ActorName</u>, Role, SpokenQuote)\nDIRECTOR_ACTS(<u>Title, YearOfRelease, DirectorName</u>, Role)", "notes": "Đúng 100%: MOVIE có khóa chính phức hợp {Title, YearOfRelease}; thuộc tính đa trị Genre tách bảng MOVIE_GENRES có PK {Title, YearOfRelease, Genre}; liên kết 1:N đưa DirectorName và CompanyName vào MOVIE; liên kết N:M Appear và ActIn tạo bảng riêng."}, {"label": "Phương án B (Lỗi gộp thuộc tính đa trị Genre vào bảng MOVIE)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, Genres, DirectorName, CompanyName)\nMOVIE_ACTORS(<u>Title, YearOfRelease, ActorName</u>, Role, SpokenQuote)\nDIRECTOR_ACTS(<u>Title, YearOfRelease, DirectorName</u>, Role)", "notes": "SAI: Để thuộc tính đa trị Genres trực tiếp trong bảng MOVIE (vi phạm dạng chuẩn 1NF)."}, {"label": "Phương án C (Lỗi khóa chính của bảng MOVIE chỉ lấy Title)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title</u>, YearOfRelease, LengthMinutes, Quote, DirectorName, CompanyName)\nMOVIE_GENRES(<u>Title, Genre</u>)\nMOVIE_ACTORS(<u>Title, ActorName</u>, Role, SpokenQuote)\nDIRECTOR_ACTS(<u>Title, DirectorName</u>, Role)", "notes": "SAI: Khóa chính của MOVIE trong đề bài là tổ hợp {Title, YearOfRelease}. Chỉ lấy Title làm PK sẽ không thể lưu trữ các bộ phim làm lại (remake) có cùng tên nhưng phát hành ở các năm khác nhau."}, {"label": "Phương án D (Lỗi đặt khóa ngoại ngược chiều ở liên kết Direct)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate, Title, YearOfRelease)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, CompanyName)\nMOVIE_GENRES(<u>Title, YearOfRelease, Genre</u>)\nMOVIE_ACTORS(<u>Title, YearOfRelease, ActorName</u>, Role, SpokenQuote)", "notes": "SAI: Đưa khóa của MOVIE sang DIRECTORS, làm mỗi đạo diễn chỉ có thể đạo diễn duy nhất 1 bộ phim trong cả sự nghiệp."}, {"label": "Phương án E (Lỗi gộp bảng N:M MOVIE_ACTORS vào MOVIE)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, DirectorName, CompanyName, ActorName, Role, SpokenQuote)\nMOVIE_GENRES(<u>Title, YearOfRelease, Genre</u>)", "notes": "SAI: Gộp mối quan hệ diễn viên vào MOVIE, khiến một bộ phim chỉ có đúng 1 diễn viên tham gia."}, {"label": "Phương án F (Lỗi thiếu khóa kết hợp ở MOVIE_GENRES)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, DirectorName, CompanyName)\nMOVIE_GENRES(<u>Title, YearOfRelease</u>, Genre)\nMOVIE_ACTORS(<u>Title, YearOfRelease, ActorName</u>, Role, SpokenQuote)\nDIRECTOR_ACTS(<u>Title, YearOfRelease, DirectorName</u>, Role)", "notes": "SAI: Bảng MOVIE_GENRES chỉ lấy {Title, YearOfRelease} làm PK, dẫn tới mỗi bộ phim chỉ có tối đa 1 thể loại duy nhất (không lưu được đa trị)."}, {"label": "Phương án G (Lỗi tách bảng thừa cho 1:N Produce và Direct)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote)\nMOVIE_DIRECTOR(<u>Title, YearOfRelease</u>, DirectorName)\nMOVIE_COMPANY(<u>Title, YearOfRelease</u>, CompanyName)\nMOVIE_GENRES(<u>Title, YearOfRelease, Genre</u>)\nMOVIE_ACTORS(<u>Title, YearOfRelease, ActorName</u>, Role, SpokenQuote)", "notes": "SAI: Tách thêm bảng dư thừa MOVIE_DIRECTOR và MOVIE_COMPANY cho mối liên kết 1:N thay vì đưa khóa ngoại vào MOVIE."}, {"label": "Phương án H (Lỗi sai khóa chính bảng MOVIE_ACTORS)", "code": "COMPANIES(<u>CompanyName</u>, Address)\nDIRECTORS(<u>DirectorName</u>, BirthDate)\nACTORS(<u>ActorName</u>, BirthDate)\nMOVIE(<u>Title, YearOfRelease</u>, LengthMinutes, Quote, DirectorName, CompanyName)\nMOVIE_GENRES(<u>Title, YearOfRelease, Genre</u>)\nMOVIE_ACTORS(<u>ActorName</u>, Title, YearOfRelease, Role, SpokenQuote)\nDIRECTOR_ACTS(<u>Title, YearOfRelease, DirectorName</u>, Role)", "notes": "SAI: Bảng MOVIE_ACTORS chỉ lấy ActorName làm khóa chính đơn, dẫn đến một diễn viên chỉ được đóng duy nhất 1 bộ phim."}], "correct_option": 0, "step_by_step_explanation": "Phương án A là phương án chính xác nhất: MOVIE có khóa chính kết hợp {Title, YearOfRelease}, đa trị Genres tách bảng đúng chuẩn PK 3 thuộc tính, các liên kết 1:N và N:M đều ánh xạ chuẩn xác."}];
+
+    // State
+    let currentExam = {
+      code: "CSDL-MT01",
+      theoryQuestions: [],
+      erProblem: null,
+      userAnswers: {}, // qIndex -> [selectedOptionIndices]
+      erAnswer: '', // free-text relational schema
+      flagged: {}, // qIndex -> boolean
+      isSubmitted: false,
+      practiceMode: false,
+      timeRemaining: 45 * 60, // 45 minutes in seconds
+      timerInterval: null
+    };
+
+    // DOM Elements
+    const theoryListEl = document.getElementById("theoryQuestionsList");
+    const erProblemEl = document.getElementById("erProblemContainer");
+    const navGridEl = document.getElementById("questionNavGrid");
+    const timerDisplayEl = document.getElementById("timerDisplay");
+    const timerBadgeEl = document.getElementById("timerBadge");
+    const progressFillEl = document.getElementById("progressFill");
+    const progressTextEl = document.getElementById("progressText");
+    const examCodeEl = document.getElementById("examCodeDisplay");
+    const practiceStatusEl = document.getElementById("practiceStatus");
+    const resultModalEl = document.getElementById("resultModal");
+
+    // Initialize App
+    function init() {
+      setupEventListeners();
+      generateNewExam();
+      loadTheme();
+    }
+
+    // Shuffler utility
+    function shuffleArray(arr) {
+      const array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // GENERATE NEW EXAM (Rotate Questions)
+    function generateNewExam() {
+      clearInterval(currentExam.timerInterval);
+
+      // Random exam code
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      currentExam.code = `CSDL-MT${randNum}`;
+      examCodeEl.textContent = currentExam.code;
+
+      // Group questions by type to guarantee balanced mix
+      const singlePool = ALL_THEORY_QUESTIONS.filter(q => q.type === 'single');
+      const multiPool = ALL_THEORY_QUESTIONS.filter(q => q.type === 'multiple');
+      const zeroPool = ALL_THEORY_QUESTIONS.filter(q => q.type === 'zero');
+
+      // Pick: 8 single choice, 4 multiple choice, 3 zero-choice = 15 questions
+      const selectedSingle = shuffleArray(singlePool).slice(0, 8);
+      const selectedMulti = shuffleArray(multiPool).slice(0, 4);
+      const selectedZero = shuffleArray(zeroPool).slice(0, 3);
+
+      const combined = shuffleArray([...selectedSingle, ...selectedMulti, ...selectedZero]);
+
+      // Process options: for each question, randomize choices if needed or build display items
+      currentExam.theoryQuestions = combined.map(q => {
+        // Clone
+        const qClone = JSON.parse(JSON.stringify(q));
+        // Add "E. Không có phương án nào đúng trong các câu trên" if zero-choice question
+        if (qClone.type === 'zero') {
+          qClone.options.push("Không có phương án nào đúng trong các câu trên");
+          // The correct option is now the last one!
+          qClone.correct = [qClone.options.length - 1];
+        }
+        return qClone;
+      });
+
+      // Pick 1 ER Problem from ER Pool (Rotate ER case studies)
+      const randER = ALL_ER_PROBLEMS[Math.floor(Math.random() * ALL_ER_PROBLEMS.length)];
+      currentExam.erProblem = JSON.parse(JSON.stringify(randER));
+
+      // Reset user state
+      currentExam.userAnswers = {};
+      currentExam.erAnswer = '';
+      currentExam.flagged = {};
+      currentExam.isSubmitted = false;
+      // Render
+      renderExam(true);
+      renderNavigator();
+      updateProgress();
+      startTimer();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // RENDER QUESTIONS
+    function renderExam(forceEr = false) {
+      renderTheoryQuestions();
+      renderErProblem(forceEr);
+    }
+
+    // RENDER THEORY QUESTIONS
+    function renderTheoryQuestions() {
+      theoryListEl.innerHTML = currentExam.theoryQuestions.map((q, idx) => {
+        const isFlagged = !!currentExam.flagged[idx];
+        const userSelected = currentExam.userAnswers[idx] || [];
+
+        let typeBadge = '';
+        let inputType = 'radio';
+        let hintText = '';
+
+        if (q.type === 'single') {
+          typeBadge = '<span class="q-type-badge type-single">1 Đáp án đúng</span>';
+          inputType = 'radio';
+          hintText = 'Chọn 1 phương án chính xác nhất';
+        } else if (q.type === 'multiple') {
+          typeBadge = '<span class="q-type-badge type-multiple">Nhiều đáp án đúng</span>';
+          inputType = 'checkbox';
+          hintText = 'Chọn tất cả các đáp án đúng';
+        } else {
+          typeBadge = '<span class="q-type-badge type-zero">Có thể 0 đáp án</span>';
+          inputType = 'checkbox';
+          hintText = 'Xem xét kỹ, nếu tất cả phương án sai hãy chọn "Không có phương án nào đúng"';
+        }
+
+        const optionsHtml = q.options.map((opt, optIdx) => {
+          const isChecked = userSelected.includes(optIdx);
+          const letter = String.fromCharCode(65 + optIdx);
+          
+          let reviewClasses = '';
+          if (currentExam.isSubmitted) {
+            const isCorrect = q.correct.includes(optIdx);
+            if (isCorrect) reviewClasses = 'correct-choice';
+            else if (isChecked && !isCorrect) reviewClasses = 'wrong-choice';
+          }
+
+          return `
+            <label class="option-item ${isChecked ? 'selected' : ''} ${reviewClasses}" onclick="handleTheoryOptionClick(${idx}, ${optIdx}, event)">
+              <input type="${inputType}" name="q_${idx}" value="${optIdx}" ${isChecked ? 'checked' : ''} ${currentExam.isSubmitted ? 'disabled' : ''}>
+              <span class="option-label-letter">${letter}.</span>
+              <span class="option-text">${opt}</span>
+            </label>
+          `;
+        }).join('');
+
+        const isShowExpl = (currentExam.isSubmitted || currentExam.practiceMode);
+        const correctLetters = q.correct.map(c => String.fromCharCode(65 + c)).join(', ') || 'Không có phương án nào (0 đáp án đúng)';
+
+        return `
+          <div class="question-card ${isFlagged ? 'flagged' : ''}" id="qCard_${idx}">
+            <div class="q-header">
+              <div class="q-number-box">
+                <span class="q-badge">Câu ${idx + 1}</span>
+                <span class="q-chapter">${q.chapter}</span>
+                ${typeBadge}
+              </div>
+              <div class="q-actions">
+                <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag(${idx})" title="Đánh dấu câu này để xem lại">
+                  ${isFlagged ? '⚑ Đã đánh dấu' : '⚐ Đánh dấu'}
+                </button>
+              </div>
+            </div>
+            <div class="q-title">
+              ${q.question}
+              <div style="font-size: 12px; color: var(--text-muted); font-weight: normal; margin-top: 4px;">
+                💡 <em>${hintText}</em>
+              </div>
+            </div>
+            <div class="options-grid">
+              ${optionsHtml}
+            </div>
+            <div class="explanation-box ${isShowExpl ? 'show' : ''}" id="expl_${idx}">
+              <div class="explanation-title">
+                <span>📘</span> Đáp án đúng: <strong>${correctLetters}</strong>
+              </div>
+              <div>${q.explanation}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // RENDER ER PROBLEM (ESSAY / TỰ LUẬN)
+    function renderErProblem(force = false) {
+      const er = currentExam.erProblem;
+      if (!er) return;
+      const isErFlagged = !!currentExam.flagged['er'];
+      const isShowErExpl = (currentExam.isSubmitted || currentExam.practiceMode);
+
+      // If textarea already exists in DOM and force is false, preserve user input & focus
+      const existingTextarea = document.getElementById('erAnswerInput');
+      if (existingTextarea && !force) {
+        existingTextarea.readOnly = currentExam.isSubmitted;
+        updateErReviewBox();
+        updateErLivePreview();
+        const explBox = document.getElementById('expl_er');
+        if (explBox) {
+          if (isShowErExpl) explBox.classList.add('show');
+          else explBox.classList.remove('show');
+        }
+        const card = document.getElementById('qCard_er');
+        if (card) {
+          if (isErFlagged) card.classList.add('flagged');
+          else card.classList.remove('flagged');
+        }
+        const flagBtn = document.getElementById('erFlagBtn');
+        if (flagBtn) {
+          flagBtn.className = `btn-flag ${isErFlagged ? 'active' : ''}`;
+          flagBtn.innerHTML = isErFlagged ? '⚑ Đã đánh dấu' : '⚐ Đánh dấu';
+        }
+        return;
+      }
+
+      erProblemEl.innerHTML = `
+        <div class="question-card ${isErFlagged ? 'flagged' : ''}" id="qCard_er">
+          <div class="q-header">
+            <div class="q-number-box">
+              <span class="q-badge" style="background: rgba(124, 58, 237, 0.2); color: #a855f7;">Câu 16 (Bài tập lớn)</span>
+              <span class="q-chapter">Chuyển đổi ER sang Mô hình Quan hệ</span>
+              <span class="q-type-badge type-zero" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">Tự luận (4.0 điểm)</span>
+            </div>
+            <div class="q-actions">
+              <button class="btn-flag ${isErFlagged ? 'active' : ''}" id="erFlagBtn" onclick="toggleFlag('er')" title="Đánh dấu câu này">
+                ${isErFlagged ? '⚑ Đã đánh dấu' : '⚐ Đánh dấu'}
+              </button>
+            </div>
+          </div>
+
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">
+            ${er.title}
+          </h3>
+
+          <div class="er-scenario-box">
+            ${formatScenarioText(er.scenario)}
+          </div>
+
+          <div class="er-diagram-container">
+            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;">
+              Sơ Đồ Thực Thể - Liên Kết (ER Diagram):
+            </div>
+            ${er.svg_diagram}
+          </div>
+
+          <div style="margin: 22px 0 8px; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span>✍️ Trình Soạn Thảo Lược Đồ Quan Hệ (Tự Luận):</span>
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;">Hỗ trợ phím Tab & nhận diện cú pháp tự động</span>
+          </div>
+
+          <div class="er-answer-hint">
+            💡 <strong>Quy ước cú pháp:</strong> Mỗi dòng một quan hệ dạng <code>TENBANG(*KhoaChinh, ThuocTinh1, ...)</code>. Đánh dấu khóa chính bằng dấu sao <code>*</code> trước tên (hoặc <code><u>...</u></code>, <code>#</code>, <code>(PK)</code>). Ví dụ: <code>NHANVIEN(*MaNV, HoTen, MaDV_LamViec)</code>.
+          </div>
+
+          <!-- EDITOR TOOLBAR -->
+          <div class="er-editor-toolbar">
+            <button type="button" class="btn-tool" onclick="insertSchemaTemplate()" title="Chèn khuôn bảng mới">
+              ➕ Thêm Bảng Mẫu
+            </button>
+            <button type="button" class="btn-tool" onclick="togglePkPrefix()" title="Thêm dấu * khóa chính cho từ đang chọn">
+              🔑 Đánh Dấu Khóa Chính (*)
+            </button>
+            <button type="button" class="btn-tool" onclick="formatErInput()" title="Căn chỉnh các dòng lược đồ">
+              ✨ Căn Chỉnh Dòng
+            </button>
+            <button type="button" class="btn-tool" onclick="clearErInput()" title="Xóa toàn bộ nội dung bài làm">
+              🧹 Xóa Trắng
+            </button>
+          </div>
+
+          <!-- TEXTAREA -->
+          <textarea id="erAnswerInput" class="er-answer-input" spellcheck="false" placeholder="NHANVIEN(*MaNV, HoTen, DiaChi, ...)&#10;DONVI(*MaDV, TenDV, ...)&#10;THAMGIA_DUAN(*MaNV, *MaDA, SoGio)" oninput="handleErInput(this.value)" ${currentExam.isSubmitted ? 'readonly' : ''}>${escapeHtml(currentExam.erAnswer)}</textarea>
+
+          <!-- LIVE PARSED PREVIEW -->
+          <div class="er-live-preview" id="erLivePreview">
+            <!-- Rendered by updateErLivePreview() -->
+          </div>
+
+          <!-- REVIEW / EVALUATION BOX -->
+          <div id="erReviewContainer">
+            <!-- Rendered by updateErReviewBox() -->
+          </div>
+
+          <!-- 7-STEP DETAILED EXPLANATION -->
+          <div class="explanation-box ${isShowErExpl ? 'show' : ''}" id="expl_er">
+            <div class="explanation-title">
+              <span>📐</span> Lời giải phân tích chi tiết quy trình chuyển đổi 7 bước:
+            </div>
+            <div>${formatScenarioText(er.step_by_step_explanation)}</div>
+          </div>
+        </div>
+      `;
+
+      updateErLivePreview();
+      updateErReviewBox();
+    }
+
+    function formatScenarioText(txt) {
+      if (!txt) return '';
+      const newline = String.fromCharCode(10);
+      return txt.split(newline).map(line => {
+        let l = line.trim();
+        if (l.startsWith('### ')) {
+          return '<h4 style="margin: 12px 0 6px; color: var(--primary);">' + l.substring(4) + '</h4>';
+        }
+        if (l.includes('**')) {
+          l = l.split('**').map((part, i) => i % 2 === 1 ? ('<strong>' + part + '</strong>') : part).join('');
+        }
+        return l;
+      }).join('<br>');
+    }
+
+    // RENDER NAVIGATOR PALETTE
+    function renderNavigator() {
+      let html = '';
+      for (let i = 0; i < 15; i++) {
+        const isAnswered = currentExam.userAnswers[i] && currentExam.userAnswers[i].length > 0;
+        const isFlagged = !!currentExam.flagged[i];
+        html += `
+          <button class="q-btn ${isAnswered ? 'answered' : ''} ${isFlagged ? 'flagged' : ''}" 
+                  onclick="scrollToQuestion(${i})" title="Câu ${i + 1}">
+            ${i + 1}
+          </button>
+        `;
+      }
+      // Button for ER
+      const isErAnswered = currentExam.erAnswer.trim() !== '';
+      const isErFlagged = !!currentExam.flagged['er'];
+      html += `
+        <button class="q-btn er-btn ${isErAnswered ? 'answered' : ''} ${isErFlagged ? 'flagged' : ''}" 
+                onclick="scrollToQuestion('er')" title="Câu 16: Bài tập ER (Tự luận)">
+          16 (Tự Luận ER)
+        </button>
+      `;
+      navGridEl.innerHTML = html;
+    }
+
+    function scrollToQuestion(target) {
+      const elId = target === 'er' ? 'qCard_er' : `qCard_${target}`;
+      const el = document.getElementById(elId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.boxShadow = '0 0 0 2px var(--primary)';
+        setTimeout(() => { el.style.boxShadow = ''; }, 1200);
+      }
+    }
+
+    // HANDLE THEORY OPTION CLICK
+    window.handleTheoryOptionClick = function(qIdx, optIdx, event) {
+      if (event) event.preventDefault();
+      if (currentExam.isSubmitted) return;
+
+      const q = currentExam.theoryQuestions[qIdx];
+      let currentSelected = currentExam.userAnswers[qIdx] || [];
+
+      if (q.type === 'single') {
+        currentExam.userAnswers[qIdx] = [optIdx];
+      } else {
+        if (q.type === 'zero' && optIdx === q.options.length - 1) {
+          if (currentSelected.includes(optIdx)) {
+            currentExam.userAnswers[qIdx] = [];
+          } else {
+            currentExam.userAnswers[qIdx] = [optIdx];
+          }
+        } else {
+          currentSelected = currentSelected.filter(idx => idx !== q.options.length - 1);
+          if (currentSelected.includes(optIdx)) {
+            currentSelected = currentSelected.filter(i => i !== optIdx);
+          } else {
+            currentSelected.push(optIdx);
+          }
+          currentExam.userAnswers[qIdx] = currentSelected;
+        }
+      }
+
+      renderTheoryQuestions();
+      renderNavigator();
+      updateProgress();
+    };
+
+    // HANDLE ER INPUT
+    window.handleErInput = function(value) {
+      if (currentExam.isSubmitted) return;
+      currentExam.erAnswer = value;
+      updateErLivePreview();
+      renderNavigator();
+      updateProgress();
+    };
+
+    // TOOLBAR ACTIONS
+    window.insertSchemaTemplate = function() {
+      if (currentExam.isSubmitted) return;
+      const textarea = document.getElementById('erAnswerInput');
+      if (!textarea) return;
+      const template = 'BANG(*KhoaChinh, ThuocTinh1, ThuocTinh2)\n';
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const val = textarea.value;
+      const before = val.substring(0, start);
+      const after = val.substring(end);
+      const needsNewline = before.length > 0 && !before.endsWith('\n');
+      const insertText = (needsNewline ? '\n' : '') + template;
+      textarea.value = before + insertText + after;
+      textarea.selectionStart = before.length + (needsNewline ? 1 : 0) + 5;
+      textarea.selectionEnd = textarea.selectionStart + 10;
+      textarea.focus();
+      handleErInput(textarea.value);
+    };
+
+    window.togglePkPrefix = function() {
+      if (currentExam.isSubmitted) return;
+      const textarea = document.getElementById('erAnswerInput');
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const val = textarea.value;
+      if (start === end) {
+        textarea.value = val.substring(0, start) + '*' + val.substring(end);
+        textarea.selectionStart = textarea.selectionEnd = start + 1;
+      } else {
+        const selected = val.substring(start, end);
+        if (selected.startsWith('*')) {
+          textarea.value = val.substring(0, start) + selected.substring(1) + val.substring(end);
+          textarea.selectionStart = start;
+          textarea.selectionEnd = end - 1;
+        } else {
+          textarea.value = val.substring(0, start) + '*' + selected + val.substring(end);
+          textarea.selectionStart = start;
+          textarea.selectionEnd = end + 1;
+        }
+      }
+      textarea.focus();
+      handleErInput(textarea.value);
+    };
+
+    window.formatErInput = function() {
+      if (currentExam.isSubmitted) return;
+      const textarea = document.getElementById('erAnswerInput');
+      if (!textarea) return;
+      const lines = textarea.value.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+      const formatted = lines.map(line => {
+        const m = line.match(/^([^()]+?)\s*\((.*)\)\s*;?$/);
+        if (!m) return line;
+        const name = m[1].trim().toUpperCase();
+        const attrs = m[2].split(',').map(a => a.trim()).filter(a => a.length > 0).join(', ');
+        return `${name}(${attrs})`;
+      }).join('\n');
+      textarea.value = formatted;
+      textarea.focus();
+      handleErInput(formatted);
+    };
+
+    window.clearErInput = function() {
+      if (currentExam.isSubmitted) return;
+      const textarea = document.getElementById('erAnswerInput');
+      if (!textarea) return;
+      if (textarea.value.trim().length > 0) {
+        if (!confirm('Bạn có chắc chắn muốn xóa bài làm tự luận ER này?')) return;
+      }
+      textarea.value = '';
+      textarea.focus();
+      handleErInput('');
+    };
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function normName(str) {
+      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').toLowerCase().replace(/[^a-z0-9]/g, '');
+    }
+
+    // Detailed Schema Parser
+    function parseSchemaDetailed(text) {
+      const rels = [];
+      text.split(/\r?\n/).forEach(line => {
+        line = line.trim();
+        if (!line || line.startsWith('//') || line.startsWith('--')) return;
+        const m = line.match(/^([^()]+?)\s*\((.*)\)\s*;?$/);
+        if (!m) return;
+        const rawName = m[1].trim();
+        const norm = normName(m[1]);
+        if (!norm) return;
+        const attrs = [];
+        const pk = [];
+        let body = m[2].replace(/<u>(.*?)<\/u>/gi, (_, inner) => inner.split(',').map(a => '*' + a.trim()).join(', '));
+        body.split(',').forEach(raw => {
+          raw = raw.trim();
+          if (!raw) return;
+          const isPk = raw.includes('*') || raw.includes('#') || /\(pk\)/i.test(raw) || /\bpk\b/i.test(raw);
+          const cleanAttr = raw.replace(/[*#]/g, '').replace(/\(pk\)/gi, '').replace(/\bpk\b/gi, '').trim();
+          const normAttr = normName(cleanAttr);
+          if (!normAttr) return;
+          attrs.push({ raw: cleanAttr, norm: normAttr, isPk });
+          if (isPk) pk.push(normAttr);
+        });
+        rels.push({
+          rawName,
+          norm,
+          attrs,
+          pkSet: new Set(pk),
+          attrSet: new Set(attrs.map(a => a.norm))
+        });
+      });
+      return rels;
+    }
+
+    // UPDATE LIVE PREVIEW BOX
+    function updateErLivePreview() {
+      const previewEl = document.getElementById('erLivePreview');
+      if (!previewEl) return;
+      const parsed = parseSchemaDetailed(currentExam.erAnswer || '');
+      if (parsed.length === 0) {
+        previewEl.innerHTML = `
+          <div class="er-live-preview-title">
+            <span>📋 Lược đồ đã nhận diện (0 bảng)</span>
+            <span style="font-size: 11.5px; color: var(--text-muted);">Cú pháp: TENBANG(*KhoaChinh, ThuocTinh1, ...)</span>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-muted); font-style: italic;">
+            Chưa có bảng quan hệ nào được nhận diện. Hãy gõ hoặc nhấn "➕ Thêm Bảng Mẫu" để bắt đầu làm bài.
+          </div>
+        `;
+        return;
+      }
+
+      let cardsHtml = parsed.map(tbl => {
+        const pkBadges = tbl.attrs.filter(a => a.isPk).map(a => `<span class="preview-pk-badge" title="Khóa chính">🔑 *${escapeHtml(a.raw)}</span>`).join(' ');
+        const otherBadges = tbl.attrs.filter(a => !a.isPk).map(a => `<span class="preview-attr-badge">${escapeHtml(a.raw)}</span>`).join(' ');
+        const warnHtml = tbl.pkSet.size === 0 ? `<span class="preview-warn-badge">⚠️ Chưa có khóa chính (cần * trước tên khóa)</span>` : '';
+        return `
+          <div class="preview-table-card">
+            <span class="preview-tbl-name">${escapeHtml(tbl.rawName)}</span>
+            ${pkBadges}
+            ${otherBadges}
+            ${warnHtml}
+          </div>
+        `;
+      }).join('');
+
+      previewEl.innerHTML = `
+        <div class="er-live-preview-title">
+          <span>📋 Lược đồ đã nhận diện (<strong style="color: var(--primary);">${parsed.length}</strong> bảng quan hệ)</span>
+          <span style="font-size: 11.5px; color: var(--success); font-weight: 600;">✓ Trình phân tích hoạt động</span>
+        </div>
+        <div class="preview-tables-grid">
+          ${cardsHtml}
+        </div>
+      `;
+    }
+
+    // Detailed Grading Algorithm (4.0 points max)
+    function gradeErDetailed(userText, refText) {
+      const refList = parseSchemaDetailed(refText);
+      const userList = parseSchemaDetailed(userText);
+      if (refList.length === 0) return { score: 0, maxScore: 4.0, tables: [] };
+      if (userList.length === 0) {
+        return {
+          score: 0,
+          maxScore: 4.0,
+          tables: refList.map(r => ({
+            name: r.rawName,
+            status: 'missing',
+            score: 0,
+            maxScore: +(4.0 / refList.length).toFixed(2),
+            feedback: 'Chưa tạo bảng quan hệ này trong bài làm'
+          }))
+        };
+      }
+
+      const perTableWeight = 4.0 / refList.length;
+      let totalScore = 0;
+      const usedUserNorms = new Set();
+      const tables = [];
+
+      refList.forEach(r => {
+        let matchedUser = userList.find(u => !usedUserNorms.has(u.norm) && u.norm === r.norm);
+        if (!matchedUser) {
+          let maxInter = 0;
+          userList.forEach(u => {
+            if (usedUserNorms.has(u.norm)) return;
+            const inter = [...r.attrSet].filter(a => u.attrSet.has(a)).length;
+            if (inter > maxInter && inter >= 1) {
+              maxInter = inter;
+              matchedUser = u;
+            }
+          });
+        }
+
+        if (!matchedUser) {
+          tables.push({
+            name: r.rawName,
+            status: 'missing',
+            userTable: null,
+            score: 0,
+            maxScore: +perTableWeight.toFixed(2),
+            feedback: 'Chưa tạo bảng quan hệ này trong bài làm'
+          });
+          return;
+        }
+
+        usedUserNorms.add(matchedUser.norm);
+        const u = matchedUser;
+
+        // Primary Key check (40% table score)
+        const pkInter = [...r.pkSet].filter(p => u.pkSet.has(p)).length;
+        const pkMatch = r.pkSet.size === u.pkSet.size && pkInter === r.pkSet.size;
+        const pkRatio = r.pkSet.size > 0 ? (pkMatch ? 1 : (pkInter / Math.max(r.pkSet.size, u.pkSet.size || 1))) : 1;
+
+        // Attributes check (60% table score)
+        const attrInter = [...r.attrSet].filter(a => u.attrSet.has(a)).length;
+        const attrUnion = new Set([...r.attrSet, ...u.attrSet]).size;
+        const attrRatio = attrUnion > 0 ? (attrInter / attrUnion) : 0;
+
+        const tableRatio = 0.4 * pkRatio + 0.6 * attrRatio;
+        const tableScore = +(tableRatio * perTableWeight).toFixed(2);
+        totalScore += tableScore;
+
+        const missingAttrs = [...r.attrSet].filter(a => !u.attrSet.has(a));
+        const extraAttrs = [...u.attrSet].filter(a => !r.attrSet.has(a));
+
+        let status = 'perfect';
+        let feedback = 'Chính xác hoàn toàn';
+        if (tableRatio < 0.95) {
+          status = 'partial';
+          const notes = [];
+          if (!pkMatch) {
+            if (u.pkSet.size === 0) notes.push('Chưa đánh dấu khóa chính (*)');
+            else notes.push('Khóa chính chưa chính xác');
+          }
+          if (missingAttrs.length > 0) notes.push('Thiếu thuộc tính: ' + missingAttrs.join(', '));
+          if (extraAttrs.length > 0) notes.push('Dư/lệch thuộc tính: ' + extraAttrs.join(', '));
+          feedback = notes.join('; ');
+        }
+
+        tables.push({
+          name: r.rawName,
+          userTable: u.rawName,
+          status,
+          score: tableScore,
+          maxScore: +perTableWeight.toFixed(2),
+          pkMatch,
+          missingAttrs,
+          extraAttrs,
+          feedback
+        });
+      });
+
+      return {
+        score: Math.min(4.0, Math.round(totalScore * 10) / 10),
+        maxScore: 4.0,
+        tables
+      };
+    }
+
+    // UPDATE DETAILED REVIEW BOX
+    function updateErReviewBox() {
+      const container = document.getElementById('erReviewContainer');
+      if (!container) return;
+      if (!currentExam.isSubmitted && !currentExam.practiceMode) {
+        container.innerHTML = '';
+        return;
+      }
+
+      const er = currentExam.erProblem;
+      const refSolution = er.options[er.correct_option];
+      const evaluation = gradeErDetailed(currentExam.erAnswer || '', refSolution.code);
+
+      let tablesEvalHtml = evaluation.tables.map(t => {
+        let badge = '';
+        let cardClass = '';
+        if (t.status === 'perfect') {
+          badge = `<span style="color: var(--success); font-weight: 700;">✅ Đúng hoàn toàn (+${t.score.toFixed(1)} / ${t.maxScore.toFixed(1)} đ)</span>`;
+          cardClass = 'status-perfect';
+        } else if (t.status === 'partial') {
+          badge = `<span style="color: var(--warning); font-weight: 700;">⚠️ Đúng một phần (+${t.score.toFixed(1)} / ${t.maxScore.toFixed(1)} đ)</span>`;
+          cardClass = 'status-partial';
+        } else {
+          badge = `<span style="color: var(--danger); font-weight: 700;">❌ Thiếu / Chưa tạo (0 / ${t.maxScore.toFixed(1)} đ)</span>`;
+          cardClass = 'status-missing';
+        }
+
+        return `
+          <div class="er-table-eval-card ${cardClass}">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="font-size: 14px; font-family: 'JetBrains Mono', monospace; color: var(--primary);">${escapeHtml(t.name)}</strong>
+              ${badge}
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">${escapeHtml(t.feedback)}</div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="er-review-box">
+          <div class="er-score-banner">
+            <div>
+              <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Đánh giá bài thi tự luận ER</div>
+              <div style="font-size: 22px; font-weight: 800; color: ${evaluation.score >= 3.5 ? 'var(--success)' : (evaluation.score >= 2.0 ? 'var(--primary)' : 'var(--danger)')};">
+                ${evaluation.score.toFixed(1)} / 4.0 điểm
+              </div>
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted); text-align: right;">
+              Chấm tự động theo chuẩn quy trình chuyển đổi ER<br>
+              <strong>${evaluation.tables.filter(t => t.status === 'perfect').length}/${evaluation.tables.length}</strong> bảng đạt điểm tuyệt đối
+            </div>
+          </div>
+
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 10px; color: var(--text-main);">
+            📊 Đánh giá chi tiết từng quan hệ:
+          </div>
+          <div class="er-tables-breakdown">
+            ${tablesEvalHtml}
+          </div>
+
+          <div class="er-side-by-side">
+            <div class="er-col">
+              <div class="er-col-title">
+                <span>📝</span> Bài làm của bạn:
+              </div>
+              <div class="er-code-box" style="border-color: rgba(59, 130, 246, 0.3);">${escapeHtml(currentExam.erAnswer.trim()) || '<em style="color:var(--text-muted)">(Để trống)</em>'}</div>
+            </div>
+            <div class="er-col">
+              <div class="er-col-title">
+                <span>✅</span> Lược đồ chuẩn tham khảo:
+              </div>
+              <div class="er-code-box" style="border-color: rgba(16, 185, 129, 0.4);">${refSolution.code}</div>
+              <div style="font-size: 12.5px; margin-top: 6px; color: var(--text-muted);">
+                <strong>Ghi chú:</strong> ${refSolution.notes}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // TAB KEY LISTENER FOR TEXTAREA
+    document.addEventListener("keydown", function(e) {
+      if (e.target && e.target.id === "erAnswerInput" && e.key === "Tab") {
+        e.preventDefault();
+        const start = e.target.selectionStart;
+        const end = e.target.selectionEnd;
+        const val = e.target.value;
+        e.target.value = val.substring(0, start) + "  " + val.substring(end);
+        e.target.selectionStart = e.target.selectionEnd = start + 2;
+        handleErInput(e.target.value);
+      }
+    });
+
+    // TOGGLE FLAGGED STATUS
+    window.toggleFlag = function(target) {
+      currentExam.flagged[target] = !currentExam.flagged[target];
+      if (target === 'er') {
+        renderErProblem(false);
+      } else {
+        renderTheoryQuestions();
+      }
+      renderNavigator();
+    };
+
+    // UPDATE PROGRESS BAR
+    function updateProgress() {
+      let answeredCount = 0;
+      for (let i = 0; i < 15; i++) {
+        if (currentExam.userAnswers[i] && currentExam.userAnswers[i].length > 0) {
+          answeredCount++;
+        }
+      }
+      if (currentExam.erAnswer.trim() !== '') answeredCount++;
+
+      const pct = Math.round((answeredCount / 16) * 100);
+      progressFillEl.style.width = pct + '%';
+      progressTextEl.textContent = `${answeredCount} / 16`;
+    }
+
+    // TIMER
+    function startTimer() {
+      clearInterval(currentExam.timerInterval);
+      timerBadgeEl.className = 'timer-badge';
+      updateTimerDisplay();
+
+      currentExam.timerInterval = setInterval(() => {
+        if (currentExam.isSubmitted) {
+          clearInterval(currentExam.timerInterval);
+          return;
+        }
+
+        currentExam.timeRemaining--;
+        updateTimerDisplay();
+
+        if (currentExam.timeRemaining <= 300 && currentExam.timeRemaining > 60) {
+          timerBadgeEl.className = 'timer-badge warning';
+        } else if (currentExam.timeRemaining <= 60 && currentExam.timeRemaining > 0) {
+          timerBadgeEl.className = 'timer-badge danger';
+        } else if (currentExam.timeRemaining <= 0) {
+          clearInterval(currentExam.timerInterval);
+          alert("⏱️ Đã hết 45 phút làm bài! Hệ thống tự động nộp bài và chấm điểm.");
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(currentExam.timeRemaining / 60);
+      const secs = currentExam.timeRemaining % 60;
+      timerDisplayEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    // SUBMIT EXAM & SCORING
+    function submitExam() {
+      currentExam.isSubmitted = true;
+      clearInterval(currentExam.timerInterval);
+
+      // Score Theory (15 questions * 0.4 = 6.0 points)
+      let theoryCorrectCount = 0;
+      for (let i = 0; i < 15; i++) {
+        const q = currentExam.theoryQuestions[i];
+        const user = currentExam.userAnswers[i] || [];
+        const correct = q.correct;
+
+        // Check exact match (all correct checked, no wrong checked)
+        const isMatch = user.length === correct.length && user.every(val => correct.includes(val));
+        if (isMatch) {
+          theoryCorrectCount++;
+        }
+      }
+      const theoryScore = (theoryCorrectCount * 0.4);
+
+      // Score ER (Essay grading, detailed algorithm, max 4.0 points)
+      const refCode = currentExam.erProblem.options[currentExam.erProblem.correct_option].code;
+      const erGradeResult = gradeErDetailed(currentExam.erAnswer || '', refCode);
+      const erScore = erGradeResult.score;
+
+      const totalScore = Math.round((theoryScore + erScore) * 10) / 10;
+
+      // Show Result Modal
+      document.getElementById("modalExamCode").textContent = `Mã đề: ${currentExam.code}`;
+      document.getElementById("scoreValue").textContent = totalScore.toFixed(1);
+      document.getElementById("theoryScoreDisplay").textContent = `${theoryScore.toFixed(1)} / 6.0 đ`;
+      document.getElementById("theoryCountDisplay").textContent = `(${theoryCorrectCount}/15 câu đúng)`;
+      
+      const erStatusEl = document.getElementById("erStatusDisplay");
+      document.getElementById("erScoreDisplay").textContent = `${erScore.toFixed(1)} / 4.0 đ`;
+      if (erScore >= 3.8) {
+        erStatusEl.textContent = "Chính xác xuất sắc (Đạt " + erScore.toFixed(1) + "/4.0)";
+        erStatusEl.style.color = "var(--success)";
+      } else if (erScore > 0) {
+        erStatusEl.textContent = `Đúng một phần (${erScore.toFixed(1)}/4.0) - Xem chi tiết bảng`;
+        erStatusEl.style.color = "var(--warning)";
+      } else {
+        erStatusEl.textContent = "Chưa chính xác (0/4.0)";
+        erStatusEl.style.color = "var(--danger)";
+      }
+
+      // Rank & styling
+      const scoreCircle = document.getElementById("scoreCircle");
+      const rankText = document.getElementById("scoreRank");
+
+      if (totalScore >= 9.0) {
+        scoreCircle.className = "score-circle excellent";
+        rankText.textContent = "XẾP LOẠI: XUẤT SẮC 🏆";
+        rankText.style.color = "var(--success)";
+      } else if (totalScore >= 8.0) {
+        scoreCircle.className = "score-circle good";
+        rankText.textContent = "XẾP LOẠI: GIỎI 🌟";
+        rankText.style.color = "var(--primary)";
+      } else if (totalScore >= 7.0) {
+        scoreCircle.className = "score-circle fair";
+        rankText.textContent = "XẾP LOẠI: KHÁ 👍";
+        rankText.style.color = "var(--warning)";
+      } else if (totalScore >= 5.0) {
+        scoreCircle.className = "score-circle fair";
+        rankText.textContent = "XẾP LOẠI: TRUNG BÌNH 📖";
+        rankText.style.color = "var(--warning)";
+      } else {
+        scoreCircle.className = "score-circle poor";
+        rankText.textContent = "XẾP LOẠI: CẦN ÔN TẬP THÊM ⚠️";
+        rankText.style.color = "var(--danger)";
+      }
+
+      resultModalEl.classList.add("show");
+
+      // Re-render exam to display green/red feedback & explanations
+      renderExam(false);
+    }
+
+    // EVENT LISTENERS
+    function setupEventListeners() {
+      document.getElementById("btnNewExam").addEventListener("click", () => {
+        if (!currentExam.isSubmitted) {
+          if (!confirm("Bạn có chắc chắn muốn đổi đề mới? Bài làm hiện tại sẽ bị xóa.")) return;
+        }
+        generateNewExam();
+      });
+
+      document.getElementById("btnModalNewExam").addEventListener("click", () => {
+        resultModalEl.classList.remove("show");
+        generateNewExam();
+      });
+
+      document.getElementById("btnCloseModalReview").addEventListener("click", () => {
+        resultModalEl.classList.remove("show");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.getElementById("btnSubmitExam").addEventListener("click", () => {
+        if (currentExam.isSubmitted) {
+          resultModalEl.classList.add("show");
+          return;
+        }
+
+        submitExam();
+      });
+
+      document.getElementById("btnPracticeMode").addEventListener("click", () => {
+        currentExam.practiceMode = !currentExam.practiceMode;
+        practiceStatusEl.textContent = currentExam.practiceMode ? "BẬT" : "TẮT";
+        practiceStatusEl.style.color = currentExam.practiceMode ? "var(--success)" : "inherit";
+        renderExam(false);
+      });
+
+      document.getElementById("btnResetAnswers").addEventListener("click", () => {
+        if (confirm("Làm lại đề thi này từ đầu?")) {
+          currentExam.userAnswers = {};
+          currentExam.erAnswer = '';
+          currentExam.flagged = {};
+          currentExam.isSubmitted = false;
+          currentExam.timeRemaining = 45 * 60;
+          renderExam(true);
+          renderNavigator();
+          updateProgress();
+          startTimer();
+        }
+      });
+
+      document.getElementById("btnThemeToggle").addEventListener("click", toggleTheme);
+    }
+
+    // THEME HANDLING
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("csdl_theme", next);
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem("csdl_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", saved);
+    }
+
+    // Boot
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
